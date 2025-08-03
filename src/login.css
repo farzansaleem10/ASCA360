@@ -1,0 +1,213 @@
+/* style.css */
+
+/* Google Fonts: Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Base styles and variables */
+:root {
+    --primary-color: #009999;
+    --primary-dark: #008080;
+    --accent-color: #00a2a2;
+    --text-dark: #333;
+    --text-light: #f0f0f0;
+    --bg-light: #ffffff;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.2);
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden; /* Prevent scrollbar due to 100vh */
+}
+
+/* Container setup */
+.container {
+    display: flex;
+    min-height: 100vh; /* Use min-height for better flexibility */
+    width: 100vw;
+}
+
+/* Left panel styling */
+.left-panel {
+    width: 20%;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); /* Subtle gradient */
+    color: var(--text-light);
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align content to start */
+    box-shadow: 2px 0 10px var(--shadow-medium); /* Add shadow for depth */
+    position: relative;
+    z-index: 1;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px; /* Increased margin */
+}
+
+.logo {
+    height: 50px; /* Slightly larger logo */
+    width: 50px;
+    background-color: var(--bg-light);
+    border-radius: 50%;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px var(--shadow-light);
+    font-size: 28px; /* Icon size */
+    color: var(--primary-color); /* Icon color */
+    font-weight: bold; /* For the 'G' text */
+}
+
+.brand {
+    font-size: 32px; /* Larger brand name */
+    font-weight: 700; /* Bolder */
+    letter-spacing: 0.5px;
+}
+
+.login-options {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Increased gap */
+    width: 100%;
+}
+
+.login-item {
+    font-size: 18px; /* Slightly larger text */
+    font-weight: 500;
+    margin-left: 65px;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+    padding: 10px 0;
+}
+
+.login-item:hover {
+    color: var(--bg-light); /* Keep color white, maybe a subtle glow */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Right panel styling */
+.right-panel {
+    width: 80%;
+    background: url("https://placehold.co/1200x800/009999/ffffff?text=Background+Image") center center / cover no-repeat; /* Placeholder image */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Overlay for background image to improve contrast */
+.right-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3); /* Darker overlay */
+    z-index: 0;
+}
+
+.language {
+    position: absolute;
+    top: 25px; /* Adjusted position */
+    right: 35px;
+    color: var(--text-light);
+    font-size: 15px;
+    font-weight: 500;
+    z-index: 1; /* Ensure it's above the overlay */
+}
+
+.form-box {
+    background-color: rgba(255, 255, 255, 0.85); /* Slightly more opaque */
+    padding: 50px; /* Increased padding */
+    border-radius: 15px; /* More rounded corners */
+    width: 100%;
+    max-width: 450px; /* Slightly wider form */
+    box-shadow: 0 8px 20px var(--shadow-medium); /* Stronger, softer shadow */
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(8px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border for frosted effect */
+}
+
+.form-box h2 {
+    margin-bottom: 30px; /* Increased margin */
+    font-size: 28px; /* Larger heading */
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.form-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Increased gap */
+}
+
+.form-box input {
+    padding: 12px 15px; /* More padding */
+    border: 1px solid #ddd; /* Solid border */
+    border-radius: 8px; /* Rounded input fields */
+    background-color: var(--bg-light);
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.form-box input::placeholder {
+    color: #999;
+}
+
+.form-box input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 153, 153, 0.2); /* Focus ring */
+}
+
+.form-box button {
+    margin-top: 30px; /* Increased margin */
+    background-color: var(--accent-color);
+    color: var(--bg-light);
+    padding: 14px; /* More padding */
+    border: none;
+    border-radius: 30px; /* More rounded */
+    font-size: 18px; /* Larger text */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 153, 153, 0.3); /* Button shadow */
+}
+
+.form-box button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 6px 15px rgba(0, 153, 153, 0.4);
+}
+
+.login-link {
+    margin-top: 25px; /* Increased margin */
+    font-size: 15px;
+    color: #666;
+    text-align: center;
+}
+
+.login-link span {
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+.committee-image {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+}
