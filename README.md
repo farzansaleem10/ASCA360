@@ -1,4 +1,4 @@
-# 🏛️ Student Association Portal
+# 🏛️ Student Association Portal - ASCA 360
 
 This is a web-based **Association Management Portal** developed for the **MCA Students' Association** at **College of Engineering Trivandrum (CET)**. It facilitates smooth communication and transparency between the student community and the administrative team, with secure login for both admins and students.
 
