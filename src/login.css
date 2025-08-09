@@ -96,7 +96,8 @@ body {
 /* Right panel styling */
 .right-panel {
     width: 80%;
-    background: url("https://placehold.co/1200x800/009999/ffffff?text=Background+Image") center center / cover no-repeat; /* Placeholder image */
+    /* background: url("https://placehold.co/1200x800/009999/ffffff?text=Background+Image") center center / cover no-repeat; Placeholder image */
+    background-color: #333;
     position: relative;
     display: flex;
     justify-content: center;
