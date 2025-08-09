@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# 🏛️ Student Association Portal - ASCA 360
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a web-based **Association Management Portal** developed for the **MCA Students' Association** at **College of Engineering Trivandrum (CET)**. It facilitates smooth communication and transparency between the student community and the administrative team, with secure login for both admins and students.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Technologies Used
 
-### `npm start`
+- **Frontend:** React.js (with plain CSS)
+- **Backend:** Node.js, Express.js
+- **Database :** Google Sheets / MongoDB / Firebase
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 👥 User Roles & Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔐 Admin Login
 
-### `npm run build`
+Admins have full access to manage and update the portal content.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### ✅ Features:
+- Add/manage **admin** and **student** user accounts
+- Manage **income and expenditure** records
+- **Upload files** and documents viewable to students
+- Add/edit **events** conducted by the association
+- **Receive complaints** from students and **mark as complete/incomplete**
+- Handle **fund requests** from students (approve or reject)
+- Access **admin-only communication portal**
+- Communicate with **students** via shared chat/forum
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 👨‍🎓 Student Login
 
-### `npm run eject`
+Students have read-only access to certain areas and interaction tools.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### ✅ Features:
+- View **income and expenditure** reports
+- View uploaded **files and documents**
+- View all **events** conducted by the association
+- Submit **complaints** to admins
+- Submit **fund requests** with status tracking
+- Access **student-only communication portal**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
