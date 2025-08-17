@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./BalanceSheet.css";
 import { Banknote, ExternalLink, RefreshCw } from "lucide-react";
+import axios from "axios";
 
 const BalanceSheetDetails = () => {
   const [rows, setRows] = useState([]);
@@ -13,7 +14,7 @@ const BalanceSheetDetails = () => {
     setLoading(true);
     setError(null);
     console.log('Fetching balance sheet data...');
-    fetch("http://localhost:5000/api/balance-sheet")
+    fetch("http://localhost:5000/api/finances/balance-sheet")
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);

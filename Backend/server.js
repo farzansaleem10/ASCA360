@@ -1,12 +1,17 @@
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-
 // Load environment variables from the .env file
 dotenv.config();
+
+// --- IMPORT YOUR ROUTERS ---
+// This assumes 'events.js' and 'finances.js' are in the same folder as server.js
+const eventRoutes = require('./events');
+const financeRoutes = require('./finances');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -105,67 +110,13 @@ app.post('/mca-students-login', async (req, res) => {
   }
 });
 
-// === Helper function to fetch Google Sheets data ===
-async function fetchGoogleSheet(range = 'Sheet1!A1:F100') {
-  const SHEET_ID = process.env.SHEET_ID;
-  const API_KEY = process.env.GOOGLE_SHEETS_API_KEY;
-  const RANGE = range || process.env.SHEET_RANGE || 'Sheet1!A1:F100';
 
-  if (!API_KEY || !SHEET_ID || API_KEY === 'YOUR_ACTUAL_API_KEY_HERE' || SHEET_ID === 'YOUR_ACTUAL_SHEET_ID_HERE') {
-    throw new Error("Google Sheets API not configured. Please set GOOGLE_SHEETS_API_KEY and SHEET_ID in .env file.");
-  }
-
-
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
-  console.log("Fetching data from Google Sheets:", url);
-  const response = await fetch(url);
-  console.log("sheet data : ", response);
-  if (!response.ok) throw new Error("Failed to fetch data from Google Sheets");
-  const jsonData = await response.json();
-  return jsonData.values || [];
-}
-
-
-// === Google Sheets API Integration ===
-app.get('/api/balance-sheet', async (req, res) => {
-  try {
-    const values = await fetchGoogleSheet();
-    console.log('Fetched balance sheet data:', values);
-    if (values.length > 0) {
-      res.json(values);
-    } else {
-      res.status(404).json({ error: "No data found in Google Sheets" });
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.get('/api/income', async (req, res) => {
-  try {
-    const values = await fetchGoogleSheet();
-    // Filter for income entries (Credit > 0)
-    const incomeData = values.filter(row => row.length >= 5 && parseFloat(row[3]) > 0);
-    res.json(incomeData);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.get('/api/expenses', async (req, res) => {
-  try {
-    const values = await fetchGoogleSheet();
-    // Filter for expense entries (Debit > 0)
-    const expenseData = values.filter(row => row.length >= 5 && parseFloat(row[4]) > 0);
-    res.json(expenseData);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+// --- USE THE ROUTERS ---
+// Connect the imported routers to the main app for their specific paths
+app.use('/api/events', eventRoutes);
+app.use('/api/finances', financeRoutes);
 
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
-  console.log('Google Sheets integration enabled. Make sure to set GOOGLE_SHEETS_API_KEY and SHEET_ID in .env file.');
-  console.log('No sample data - all financial data will be fetched from Google Sheets.');
 });

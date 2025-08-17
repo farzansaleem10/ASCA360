@@ -27,14 +27,20 @@ const Messages = () => (
   </div>
 );
 
-const Courses = () => (
-  <div className="module-card">
-    <button className="module-btn" onClick={() => alert('Viewing Courses...')}>
-      <BookOpen size={18} />
-      Events
-    </button>
-  </div>
-);
+const Events = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button 
+        className="module-btn" 
+        // When clicked, this button navigates to the '/events' page.
+        onClick={() => navigate('/events')}
+      >
+        <BookOpen size={18} />
+        Events
+      </button>
+    </div>
+  );};
 
 const Profile = () => (
   <div className="module-card">
@@ -66,7 +72,7 @@ const StudentDashboard = ({userName}) => (
         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
          <BalanceSheets /> {/* <-- Shows Google Sheet data */}
           <Messages />
-          <Courses />
+          <Events />
           <Profile />
           <Results />
         </div>

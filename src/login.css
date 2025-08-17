@@ -20,7 +20,7 @@ body {
     font-family: 'Inter', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow: hidden; /* Prevent scrollbar due to 100vh */
+    overflow: auto; /* Prevent scrollbar due to 100vh */
 }
 
 /* Container setup */
@@ -105,16 +105,16 @@ body {
 }
 
 /* Overlay for background image to improve contrast */
-.right-panel::before {
+/* .right-panel::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3); /* Darker overlay */
+    background-color: rgba(0, 0, 0, 0.3); 
     z-index: 0;
-}
+} */
 
 .language {
     position: absolute;

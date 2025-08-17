@@ -1,6 +1,5 @@
 import React from "react";
 import "./Dashboard.css";
-import BalanceSheet from "./BalanceSheetDetails";
 import { Banknote, Wallet, CalendarDays, MessageSquareWarning, Megaphone } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
@@ -44,18 +43,21 @@ const FundRequest = () => (
   </div>
 );
 
-const Events = () => (
-  <div className="module-card">
-    <button
-      onClick={() => alert('Viewing Events...')}
-      className="module-btn"
-    >
-      <CalendarDays size={18} />
-       Events
-    </button>
-  </div>
-);
-
+const Events = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button
+        // When clicked, this button will now navigate to the '/events-admin' page.
+        onClick={() => navigate('/events-admin')}
+        className="module-btn"
+      >
+        <CalendarDays size={18} />
+        Events
+      </button>
+    </div>
+  );
+};
 const ComplaintRecieved = () => (
   <div className="module-card">
     <button

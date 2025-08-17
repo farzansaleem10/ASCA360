@@ -7,7 +7,10 @@ import McaStudent from './McaStudent';
 import Dashboard from './Dashboard';
 import StudentDashboard from './StudentDashboard';
 import BalanceSheetDetails from './BalanceSheetDetails'; // <-- New details page
+import AddEvent from './AddEvent'; // Or whatever you named it
 import './login.css';
+import ViewEvents from './ViewEvents';
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -74,6 +77,8 @@ const App = () => {
               }
             />
             <Route path="/balance-sheet" element={<BalanceSheetDetails />} />
+             <Route path="/events-admin" element={<AddEvent />} />
+             <Route path="/events" element={<ViewEvents />} />
           </Routes>
         </div>
       </div>
