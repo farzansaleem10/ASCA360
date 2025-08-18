@@ -12,7 +12,7 @@ dotenv.config();
 // This assumes 'events.js' and 'finances.js' are in the same folder as server.js
 const eventRoutes = require('./events');
 const financeRoutes = require('./finances');
-
+const complaintsRoutes = require('./complaints');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -115,6 +115,7 @@ app.post('/mca-students-login', async (req, res) => {
 // Connect the imported routers to the main app for their specific paths
 app.use('/api/events', eventRoutes);
 app.use('/api/finances', financeRoutes);
+app.use('/api/complaints', complaintsRoutes);
 
 // Start Server
 app.listen(PORT, () => {

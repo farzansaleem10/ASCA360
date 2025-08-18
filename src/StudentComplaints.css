@@ -1,0 +1,107 @@
+/* StudentComplaints.css */
+
+.complaint-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+  font-family: 'Inter', sans-serif;
+ 
+}
+
+.complaint-card {
+  width: 100%;
+  max-width: 42rem;
+  background-color: #ffffff;
+  border-radius: 1.5rem; /* 24px */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
+  padding: 2rem; /* 32px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem; /* 24px */
+}
+
+.complaint-title {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 800;
+  text-align: center;
+  color: #1f2937; /* gray-800 */
+}
+
+.complaint-subtitle {
+  text-align: center;
+  font-size: 1.125rem; /* 18px */
+  color: #4b5563; /* gray-600 */
+}
+
+.complaint-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* 24px */
+}
+
+.complaint-textarea {
+  width: 100%;
+  height: 10rem; /* 160px */
+
+  color: #374151; /* gray-700 */
+  background-color: #ffffff;
+  border-radius: 0.75rem; /* 12px */
+  border: 1px solid #d1d5db; /* gray-300 */
+  transition-property: all;
+  transition-duration: 300ms;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+}
+
+.complaint-textarea:focus {
+  outline: none;
+  border-color: #3b82f6; /* blue-500 */
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5); /* ring-4 with blue-500/50 */
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: #2563eb; /* blue-600 */
+  color: #ffffff;
+  padding: 1rem; /* 16px */
+  border-radius: 0.75rem; /* 12px */
+  font-weight: 700;
+  font-size: 1.125rem; /* 18px */
+  transition: all 300ms;
+  transform: scale(1);
+}
+
+.submit-btn:hover {
+  background-color: #1d4ed8; /* blue-700 */
+  transform: scale(1.05);
+}
+
+.submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.5); /* focus:ring-4 focus:ring-blue-300 */
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.complaint-message {
+  margin-top: 1.5rem; /* 24px */
+  text-align: center;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+}
+
+.complaint-message.success {
+  color: #16a34a; /* green-600 */
+}
+
+.complaint-message.error {
+  color: #dc2626; /* red-600 */
+}

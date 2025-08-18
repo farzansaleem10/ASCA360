@@ -58,18 +58,21 @@ const Events = () => {
     </div>
   );
 };
-const ComplaintRecieved = () => (
-  <div className="module-card">
-    <button
-      onClick={() => alert('Filing a Complaint...')}
-      className="module-btn"
-    >
-      <MessageSquareWarning size={18} />
-      Complaints received
-    </button>
-  </div>
-);
-
+const ComplaintRecieved = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button
+        // When clicked, this button will now navigate to the '/events-admin' page.
+        onClick={() => navigate('/view-complaint')}
+        className="module-btn"
+      >
+        <CalendarDays size={18} />
+        View Complaints
+      </button>
+    </div>
+  );
+};
 const Announcements = () => (
   <div className="module-card">
     <button

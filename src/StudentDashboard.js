@@ -42,14 +42,21 @@ const Events = () => {
     </div>
   );};
 
-const Profile = () => (
-  <div className="module-card">
-    <button className="module-btn" onClick={() => alert('Viewing Profile...')}>
-      <User2 size={18} />
-      File a Complaint
-    </button>
-  </div>
-);
+const FileComplaint = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button 
+        className="module-btn" 
+        // When clicked, this button navigates to the '/events' page.
+        onClick={() => navigate('/file-complaint')}
+      >
+        <BookOpen size={18} />
+        File a Complaint
+      </button>
+    </div>
+  );};
+
 
 const Results = () => (
   <div className="module-card">
@@ -73,7 +80,7 @@ const StudentDashboard = ({userName}) => (
          <BalanceSheets /> {/* <-- Shows Google Sheet data */}
           <Messages />
           <Events />
-          <Profile />
+          <FileComplaint />
           <Results />
         </div>
       </main>

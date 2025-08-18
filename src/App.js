@@ -10,6 +10,8 @@ import BalanceSheetDetails from './BalanceSheetDetails'; // <-- New details page
 import AddEvent from './AddEvent'; // Or whatever you named it
 import './login.css';
 import ViewEvents from './ViewEvents';
+import StudentComplaints from './StudentComplaint';
+import ViewComplaints from './ViewComplaints'; // Import the complaints view component
 
 
 const App = () => {
@@ -79,6 +81,8 @@ const App = () => {
             <Route path="/balance-sheet" element={<BalanceSheetDetails />} />
              <Route path="/events-admin" element={<AddEvent />} />
              <Route path="/events" element={<ViewEvents />} />
+             <Route path="/file-complaint" element={<StudentComplaints />} />
+             <Route path="/view-complaint" element={<ViewComplaints />} />
           </Routes>
         </div>
       </div>
