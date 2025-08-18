@@ -13,6 +13,7 @@ dotenv.config();
 const eventRoutes = require('./events');
 const financeRoutes = require('./finances');
 const complaintsRoutes = require('./complaints');
+const announcementRoutes = require('./announcement');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -116,6 +117,7 @@ app.post('/mca-students-login', async (req, res) => {
 app.use('/api/events', eventRoutes);
 app.use('/api/finances', financeRoutes);
 app.use('/api/complaints', complaintsRoutes);
+app.use('/api/announcement', announcementRoutes);
 
 // Start Server
 app.listen(PORT, () => {

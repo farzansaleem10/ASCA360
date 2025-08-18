@@ -18,15 +18,20 @@ const BalanceSheets = () => {
     </div>
   );
 };
-const Messages = () => (
-  <div className="module-card">
-    <button className="module-btn" onClick={() => alert('Checking Messages...')}>
-      <MessageCircle size={18} />
-      Fund Request
-    </button>
-  </div>
-);
-
+const ViewAnnouncements = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button
+        onClick={() => navigate('/view-announcement')}
+        className="module-btn"
+      >
+        <Banknote size={18} />
+        Announcements
+      </button>
+    </div>
+  );
+};
 const Events = () => {
   const navigate = useNavigate();
   return (
@@ -78,10 +83,10 @@ const StudentDashboard = ({userName}) => (
       <main>
         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
          <BalanceSheets /> {/* <-- Shows Google Sheet data */}
-          <Messages />
+          <Results />
           <Events />
           <FileComplaint />
-          <Results />
+          <ViewAnnouncements />
         </div>
       </main>
     </div>

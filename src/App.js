@@ -12,6 +12,8 @@ import './login.css';
 import ViewEvents from './ViewEvents';
 import StudentComplaints from './StudentComplaint';
 import ViewComplaints from './ViewComplaints'; // Import the complaints view component
+import CreateAnnouncement from './CreateAnnouncement';
+import ViewAnnouncements from './ViewAnnouncements';
 
 
 const App = () => {
@@ -83,6 +85,8 @@ const App = () => {
              <Route path="/events" element={<ViewEvents />} />
              <Route path="/file-complaint" element={<StudentComplaints />} />
              <Route path="/view-complaint" element={<ViewComplaints />} />
+             <Route path="/add-announcement" element={<CreateAnnouncement />} />
+             <Route path="/view-announcement" element={<ViewAnnouncements />} />
           </Routes>
         </div>
       </div>

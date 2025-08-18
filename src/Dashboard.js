@@ -73,18 +73,21 @@ const ComplaintRecieved = () => {
     </div>
   );
 };
-const Announcements = () => (
-  <div className="module-card">
-    <button
-      onClick={() => alert('Reading Announcements...')}
-      className="module-btn"
-    >
-      <Megaphone size={18} />
-      Announcements
-    </button>
-  </div>
-);
-
+const CreateAnnouncement = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button
+        // When clicked, this button will now navigate to the '/events-admin' page.
+        onClick={() => navigate('/add-announcement')}
+        className="module-btn"
+      >
+        <CalendarDays size={18} />
+        Add Announcement
+      </button>
+    </div>
+  );
+};
 const DashBoard = ({ userRole = "asca", onLogout = () => {} }) => {
   const navigate = useNavigate();
   
@@ -104,7 +107,7 @@ const DashBoard = ({ userRole = "asca", onLogout = () => {} }) => {
             <FundRequest />
             <Events />
             <ComplaintRecieved />
-            <Announcements />
+            <CreateAnnouncement />
           </div>
         </main>
       </div>
