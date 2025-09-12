@@ -14,6 +14,8 @@ import StudentComplaints from './StudentComplaint';
 import ViewComplaints from './ViewComplaints'; // Import the complaints view component
 import CreateAnnouncement from './CreateAnnouncement';
 import ViewAnnouncements from './ViewAnnouncements';
+import Academics from './Academics';
+import Semester1 from './Semester1';
 
 
 const App = () => {
@@ -87,6 +89,8 @@ const App = () => {
              <Route path="/view-complaint" element={<ViewComplaints />} />
              <Route path="/add-announcement" element={<CreateAnnouncement />} />
              <Route path="/view-announcement" element={<ViewAnnouncements />} />
+             <Route path="/academics" element={<Academics />} />
+             <Route path="/semester-1" element={<Semester1 />} />
           </Routes>
         </div>
       </div>

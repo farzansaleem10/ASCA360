@@ -41,8 +41,9 @@ body {
     justify-content: center;
     align-items: flex-start; /* Align content to start */
     box-shadow: 2px 0 10px var(--shadow-medium); /* Add shadow for depth */
-    position: relative;
+    position: fixed;
     z-index: 1;
+    height: 100vh;
 }
 
 .logo-section {
@@ -102,6 +103,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 20%;
+    overflow-y: auto;
 }
 
 /* Overlay for background image to improve contrast */
