@@ -77,6 +77,20 @@ const Academics = () => {
       </button>
     </div>
   );};
+const  FundRequest= () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button 
+        className="module-btn" 
+        // When clicked, this button navigates to the '/events' page.
+        onClick={() => navigate('/fundrequest')}
+      >
+        <BookOpen size={18} />
+       Fund Request
+      </button>
+    </div>
+  );};
 
 
 const StudentDashboard = ({userName}) => (
@@ -92,6 +106,7 @@ const StudentDashboard = ({userName}) => (
          <BalanceSheets /> {/* <-- Shows Google Sheet data */}
           <Academics/>
           <Events />
+          <FundRequest/>
           <FileComplaint />
           <ViewAnnouncements />
         </div>

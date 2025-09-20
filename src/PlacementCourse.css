@@ -1,0 +1,161 @@
+.placement-course-container {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+  /* You can keep the radius if you like the look */
+  border-radius: 15px; 
+}
+
+.placement-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.2s ease-in-out;
+}
+
+.back-button:hover {
+  background-color: #f1f3f5;
+  transform: translateY(-2px);
+}
+
+.course-layout {
+  display: flex;
+  flex-wrap: wrap; /* Allows sidebar to stack on smaller screens */
+  gap: 2rem;
+}
+
+.video-player-section {
+  flex: 3; /* Takes more space */
+  min-width: 300px;
+}
+
+.video-player-section h2 {
+  margin-top: 0;
+  font-size: 1.75rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background-color: #000;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-description {
+  color: #555;
+  line-height: 1.6;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.course-content-sidebar {
+  flex: 1; /* Takes less space */
+  min-width: 280px;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  height: fit-content; /* Sidebar height adjusts to content */
+}
+
+.course-content-sidebar h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar-container {
+  width: 100%;
+  background-color: #e9ecef;
+  border-radius: 10px;
+  height: 8px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #007bff; /* Blue progress bar */
+  border-radius: 10px;
+}
+
+.video-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.video-list-item {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: 1px solid transparent;
+}
+
+.video-list-item:hover {
+  background-color: #f8f9fa;
+}
+
+.video-list-item.current {
+  background-color: #e9f5ff;
+  border-color: #007bff;
+  font-weight: 600;
+}
+
+.video-list-item .icon {
+  margin-right: 0.75rem;
+  color: #adb5bd; /* Default icon color */
+  flex-shrink: 0;
+}
+
+.video-list-item .completed-icon {
+  color: #28a745; /* Green checkmark */
+}
+
+.video-list-item .video-title {
+  flex-grow: 1;
+  font-size: 0.95rem;
+}
