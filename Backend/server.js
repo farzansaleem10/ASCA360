@@ -120,7 +120,7 @@ app.use('/api/finances', financeRoutes);
 app.use('/api/complaints', complaintsRoutes);
 app.use('/api/announcement', announcementRoutes);
 app.use(cors({
-  origin: ['https://asca360-new.vercel.app/', 'http://localhost:3000','https://asca360.onrender.com'], // allowed origins
+  origin: '*', // allowed origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // allowed HTTP methods
   credentials: true, // if you need to send cookies/auth headers
 }));
