@@ -22,7 +22,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://yourfrontend.com'],
+  origin: ['http://localhost:3000', 'https://asca-360.vercel.app/'],
 };
 
 app.use(cors(corsOptions));
