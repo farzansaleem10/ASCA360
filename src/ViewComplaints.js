@@ -13,7 +13,7 @@ const ViewComplaints = () => {
   // Function to fetch all complaints from the backend
   const fetchComplaints = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/complaints');
+      const response = await fetch('https://asca360.onrender.com/api/complaints');
       if (!response.ok) {
         throw new Error('Failed to fetch complaints. Check server connection.');
       }
@@ -29,7 +29,7 @@ const ViewComplaints = () => {
   // Function to mark a complaint as completed
   const handleMarkAsComplete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/complaints/${id}`, {
+      const response = await fetch(`https://asca360.onrender.com/api/complaints/${id}`, {
         method: 'PUT',
       });
       if (!response.ok) {

@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // The MongoDB connection string must match the one in your server.js file
-const MONGODB_URI = 'mongodb://localhost:27017/asca_db';
+const MONGODB_URI = 'mongodb+srv://asca360_db_user:01%40Meelas@asca360.jeqwvbc.mongodb.net/?retryWrites=true&w=majority&appName=asca360';
 
 // === User Schema and Model ===
 // Defining the schema and model directly in this script to make it self-contained

@@ -29,7 +29,7 @@ const AddEvent = () => {
 
     try {
       // 2. Send the data to your backend API endpoint
-      const response = await fetch('http://localhost:5000/api/events', {
+      const response = await fetch('https://asca360.onrender.com/api/events', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // Tell the server we're sending JSON

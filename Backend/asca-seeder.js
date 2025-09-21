@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // The connection string for your MongoDB database.
 // Make sure this matches the one in your server.js file.
-const MONGODB_URI = 'mongodb://localhost:27017/asca_db';
+const MONGODB_URI = process.env.MONGODB_URI;
 
 // === User Schema and Model ===
 // This schema must match the one in your server.js file exactly.

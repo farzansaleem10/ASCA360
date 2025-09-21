@@ -9,7 +9,7 @@ const ViewAnnouncements = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/announcement');
+      const response = await fetch('https://asca360.onrender.com/api/announcement');
       if (!response.ok) {
         throw new Error('Failed to fetch announcements. Check server connection.');
       }

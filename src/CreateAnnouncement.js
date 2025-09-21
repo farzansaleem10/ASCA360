@@ -25,7 +25,7 @@ const CreateAnnouncement = () => {
     console.log('Sending payload to backend:', payload);
     
     try {
-      const response = await fetch('http://localhost:5000/api/announcement', {
+      const response = await fetch('https://asca360.onrender.com/api/announcement', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

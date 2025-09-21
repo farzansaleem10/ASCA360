@@ -14,7 +14,7 @@ const BalanceSheetDetails = () => {
     setLoading(true);
     setError(null);
     console.log('Fetching balance sheet data...');
-    fetch("http://localhost:5000/api/finances/balance-sheet")
+    fetch("https://asca360.onrender.com/finances/balance-sheet")
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);

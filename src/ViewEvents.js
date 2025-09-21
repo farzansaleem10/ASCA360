@@ -16,7 +16,7 @@ const ViewEvents = () => {
       try {
         setLoading(true);
         // 1. Fetch the data from your backend API
-        const response = await fetch('http://localhost:5000/api/events');
+        const response = await fetch('https://asca360.onrender.com/api/events');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

@@ -23,7 +23,7 @@ const StudentComplaints = () => {
     
     try {
       // Make a POST request to the backend's complaints endpoint
-      const response = await fetch('http://localhost:5000/api/complaints', {
+      const response = await fetch('https://asca360.onrender.com/api/complaints', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ author, text: complaintText }),
