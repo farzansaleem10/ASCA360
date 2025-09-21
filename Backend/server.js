@@ -21,6 +21,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://yourfrontend.com'],
+};
+
+app.use(cors(corsOptions));
+
 // === Database Connection ===
 // IMPORTANT: You must add MONGODB_URI to your Vercel project's Environment Variables
 const MONGODB_URI = process.env.MONGODB_URI; 
