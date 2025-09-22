@@ -35,6 +35,10 @@ mongoose.connect(MONGODB_URI)
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
+
+
+
+
 // === User Schema and Model ===
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
