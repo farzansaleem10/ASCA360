@@ -120,18 +120,7 @@ const App = () => {
       {/* --- NEW CODE END --- */}
 
       <div className="container">
-        <div className="left-panel">
-          {/* ... (rest of your existing JSX, no changes needed) */}
-          <div className="logo-section">
-            <div className="brand">ASCA360</div>
-          </div>
-          <div className="login-options">
-            <div className="login-item" onClick={() => setActiveForm('asca')}>ASCA Login</div>
-            <div className="login-item" onClick={() => setActiveForm('student')}>Student Login</div>
-            <div className="login-item" onClick={() => setActiveForm('committee')}>Asca Committee</div>
-            <div className="login-item" onClick={() => setActiveForm('mca-student')}>MCA Students</div>
-          </div>
-        </div>
+       
         <div className="right-panel">
           <Routes>
             <Route

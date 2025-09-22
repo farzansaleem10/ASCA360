@@ -17,6 +17,7 @@
 
 body {
     margin: 0;
+    padding: 0;
     font-family: 'Inter', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -27,33 +28,19 @@ body {
 .container {
     display: flex;
     min-height: 100vh; /* Use min-height for better flexibility */
-    width: 100vw;
+    width: 100%;
 }
 
 /* Left panel styling */
-.left-panel {
-    width: 20%;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); /* Subtle gradient */
-    color: var(--text-light);
-    padding: 40px 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start; /* Align content to start */
-    box-shadow: 2px 0 10px var(--shadow-medium); /* Add shadow for depth */
-    position: fixed;
-    z-index: 1;
-    height: 100vh;
-}
 
-.logo-section {
+/* .logo-section {
     display: flex;
     align-items: center;
-    margin-bottom: 60px; /* Increased margin */
-}
-
+    margin-bottom: 60px; 
+} */
+/* 
 .logo {
-    height: 50px; /* Slightly larger logo */
+    height: 50px; 
     width: 50px;
     background-color: var(--bg-light);
     border-radius: 50%;
@@ -62,26 +49,27 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 2px 5px var(--shadow-light);
-    font-size: 28px; /* Icon size */
-    color: var(--primary-color); /* Icon color */
-    font-weight: bold; /* For the 'G' text */
-}
+    font-size: 28px;
+    color: var(--primary-color); 
+    font-weight: bold; 
+} */
 
-.brand {
-    font-size: 32px; /* Larger brand name */
-    font-weight: 700; /* Bolder */
+/* .brand {
+    font-size: 32px;
+    font-weight: 700; 
     letter-spacing: 0.5px;
-}
+    text-align: center;
+} */
 
-.login-options {
+/* .login-options {
     display: flex;
     flex-direction: column;
-    gap: 25px; /* Increased gap */
+    gap: 25px;
     width: 100%;
 }
 
 .login-item {
-    font-size: 18px; /* Slightly larger text */
+    font-size: 18px;
     font-weight: 500;
     margin-left: 65px;
     cursor: pointer;
@@ -90,20 +78,21 @@ body {
 }
 
 .login-item:hover {
-    color: var(--bg-light); /* Keep color white, maybe a subtle glow */
+    color: var(--bg-light);
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-}
+} */
 
 /* Right panel styling */
 .right-panel {
-    width: 80%;
+    width: 100%;
+    flex: 1;
     /* background: url("https://placehold.co/1200x800/009999/ffffff?text=Background+Image") center center / cover no-repeat; Placeholder image */
     background-color: #333;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 20%;
+ 
     overflow-y: auto;
 }
 
@@ -119,15 +108,15 @@ body {
     z-index: 0;
 } */
 
-.language {
+/* .language {
     position: absolute;
-    top: 25px; /* Adjusted position */
+    top: 25px;
     right: 35px;
     color: var(--text-light);
     font-size: 15px;
     font-weight: 500;
-    z-index: 1; /* Ensure it's above the overlay */
-}
+    z-index: 1; 
+} */
 
 .form-box {
     background-color: rgba(255, 255, 255, 0.85); /* Slightly more opaque */
