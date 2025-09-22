@@ -25,17 +25,19 @@ const App = () => {
   const [activeForm, setActiveForm] = useState('student');
 
   // --- NEW CODE START ---
-  const [installPrompt, setInstallPrompt] = useState(null);
+   const [installPrompt, setInstallPrompt] = useState(null);
 
   useEffect(() => {
+    // Listen for the browser's install prompt event
     const handler = (e) => {
-      e.preventDefault();
+      e.preventDefault(); // Prevent the default mini-infobar from appearing
       console.log("Install prompt event captured.");
-      setInstallPrompt(e);
+      setInstallPrompt(e); // Save the event so it can be triggered later
     };
 
     window.addEventListener('beforeinstallprompt', handler);
 
+    // Cleanup the event listener when the component unmounts
     return () => {
       window.removeEventListener('beforeinstallprompt', handler);
     };
@@ -45,15 +47,17 @@ const App = () => {
     if (!installPrompt) {
       return;
     }
+    // Show the browser's installation prompt
     installPrompt.prompt();
+    // Wait for the user to respond
     installPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt');
-        } else {
-          console.log('User dismissed the install prompt');
-        }
-        setInstallPrompt(null); // Clear the prompt once used
-      });
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      } else {
+        console.log('User dismissed the install prompt');
+      }
+      setInstallPrompt(null); // Clear the prompt once it's been used
+    });
   };
   // --- NEW CODE END ---
 
@@ -88,20 +92,29 @@ const App = () => {
 
   return (
     <Router>
-      {/* --- NEW CODE START --- */}
       {installPrompt && (
-        <div className="custom-install-popup">
-          <div className="popup-content">
-             <div className="popup-header">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-                <h3>Install ASCA360</h3>
-             </div>
-             <p>Install our app for a better experience and quick launch.</p>
-             <div className="popup-buttons">
-               <button className="popup-install-btn" onClick={handleInstallClick}>Install App</button>
-               <button className="popup-later-btn" onClick={() => setInstallPrompt(null)}>Later</button>
-             </div>
-          </div>
+        <div className="install-app-card-container">
+            <div className="install-app-card">
+                <div className="install-app-card__header">
+                    <div className="install-app-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                    </div>
+                    <h3 className="install-app-card__title">Install ASCA360</h3>
+                    <button className="install-app-card__close" onClick={() => setInstallPrompt(null)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <div className="install-app-card__body">
+                    <p className="install-app-card__content">Install our app for a better experience and quick launch.</p>
+                </div>
+                <div className="install-app-card__actions">
+                    <button className="install-app-card__button install-app-card__button--secondary" onClick={() => setInstallPrompt(null)}>Later</button>
+                    <button className="install-app-card__button install-app-card__button--primary" onClick={handleInstallClick}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        <span>Install App</span>
+                    </button>
+                </div>
+            </div>
         </div>
       )}
       {/* --- NEW CODE END --- */}
