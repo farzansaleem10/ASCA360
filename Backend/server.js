@@ -14,6 +14,7 @@ const financeRoutes = require('./finances');
 const complaintsRoutes = require('./complaints');
 const announcementRoutes = require('./announcement');
  const fundRoutes = require('./fund'); 
+ const alumniRoutes = require('./alumni');
 const app = express();
 // The PORT variable is not needed for Vercel deployment
 // const PORT = process.env.PORT || 5000; 
@@ -131,6 +132,7 @@ app.use('/api/finances', financeRoutes);
 app.use('/api/complaints', complaintsRoutes);
 app.use('/api/announcement', announcementRoutes);
 app.use('/api/funds', fundRoutes);
+app.use('/api/alumni', alumniRoutes);
 app.use(cors({
   origin: '*', // allowed origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // allowed HTTP methods
