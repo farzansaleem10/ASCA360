@@ -39,7 +39,7 @@ const StudentLogin = ({ onLogin }) => {
 
   return (
     <div className="form-box">
-      <h2>Student Login</h2>
+      <h2> Login</h2>
       <form onSubmit={handleLogin}>
         <input 
           type="email" 

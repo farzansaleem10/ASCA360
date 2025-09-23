@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; // <-- Import useEffect
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route,useLocation } from 'react-router-dom';
 import StudentLogin from './StudentLogin';
 import AscaLogin from './AscaLogin';
 import AscaCommittee from './AscaCommittee';
@@ -16,6 +16,11 @@ import CreateAnnouncement from './CreateAnnouncement';
 import ViewAnnouncements from './ViewAnnouncements';
 import Academics from './Academics';
 import Semester1 from './Semester1';
+import FundRequest from './FundRequest';
+
+
+
+
 
 
 const App = () => {
@@ -81,8 +86,8 @@ const App = () => {
         return <AscaLogin onLogin={handleLogin} />;
       case 'student':
         return <StudentLogin onLogin={handleLogin} />;
-      case 'committee':
-        return <AscaCommittee onLogin={handleLogin} />;
+//       case 'committee':
+//         return <AscaCommittee onLogin={handleLogin} />;
       case 'mca-student':
         return <McaStudent onLogin={handleLogin} />;
       default:
@@ -91,7 +96,9 @@ const App = () => {
   };
 
   return (
+  
     <Router>
+   
       {installPrompt && (
         <div className="install-app-card-container">
             <div className="install-app-card">
@@ -119,9 +126,10 @@ const App = () => {
       )}
       {/* --- NEW CODE END --- */}
 
-      <div className="container">
+     
        
         <div className="right-panel">
+
           <Routes>
             <Route
               path="/"
@@ -146,9 +154,11 @@ const App = () => {
              <Route path="/view-announcement" element={<ViewAnnouncements />} />
              <Route path="/academics" element={<Academics />} />
              <Route path="/semester-1" element={<Semester1 />} />
+            <Route path="/asca-committee" element={<AscaCommittee />} />
+            <Route path="/fundrequest" element={<FundRequest />} />
           </Routes>
         </div>
-      </div>
+     
     </Router>
   );
 };

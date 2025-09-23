@@ -91,6 +91,22 @@ const  FundRequest= () => {
       </button>
     </div>
   );};
+  const Committee = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button 
+        className="module-btn" 
+        // When clicked, this button navigates to the '/events' page.
+        onClick={() => navigate('/asca-committee')}
+      >
+        <BookOpen size={18} />
+        ASCA Commitee
+      </button>
+    </div>
+  );};
+  
+
 
 
 const StudentDashboard = ({userName}) => (
@@ -109,6 +125,7 @@ const StudentDashboard = ({userName}) => (
           <FundRequest/>
           <FileComplaint />
           <ViewAnnouncements />
+          <Committee/>
         </div>
       </main>
     </div>
