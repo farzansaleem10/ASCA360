@@ -31,18 +31,20 @@ const RecordTransaction = () => (
 
 
 
-const FundRequest = () => (
-  <div className="module-card">
-    <button
-      onClick={() => alert('Submitting Fund Request...')}
-      className="module-btn"
-    >
-      <Wallet size={18} />
-       Fund Requests
-    </button>
-  </div>
-);
-
+const FundRequest = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button
+        onClick={() => navigate('/fundpending')}
+        className="module-btn"
+      >
+        <Banknote size={18} />
+        Fund Request
+      </button>
+    </div>
+  );
+};
 const Events = () => {
   const navigate = useNavigate();
   return (
@@ -69,6 +71,20 @@ const ComplaintRecieved = () => {
       >
         <CalendarDays size={18} />
         View Complaints
+      </button>
+    </div>
+  );
+};
+const AlumniRequests = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button
+        onClick={() => navigate('/alumnirequest')}
+        className="module-btn"
+      >
+        <Banknote size={18} />
+        Alumni Request
       </button>
     </div>
   );
@@ -107,6 +123,7 @@ const DashBoard = ({ userRole = "asca", onLogout = () => {} }) => {
             <FundRequest />
             <Events />
             <ComplaintRecieved />
+            <AlumniRequests />
             <CreateAnnouncement />
           </div>
         </main>

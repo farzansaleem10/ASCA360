@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './FundRequest.css';
+import backendUrl from './config';
 
 // The component no longer needs the userName prop
 const FundRequest = () => {
@@ -38,7 +39,7 @@ const FundRequest = () => {
         submittedBy: formData.studentName, // Using the name from the new input field
       };
 
-      const response = await fetch('https://asca360.onrender.com/api/fund', {
+      const response = await fetch(`${backendUrl}/funds`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

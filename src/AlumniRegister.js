@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './AlumniRegister.css';
+import backendUrl from './config';
 
 const AlumniRegister = () => {
   const [formData, setFormData] = useState({
@@ -83,7 +84,7 @@ const AlumniRegister = () => {
     submissionData.append('pgCertificate', formData.pgCertificate);
 
     try {
-      const response = await fetch('https://asca360.onrender.com/api/alumni/register', {
+      const response = await fetch(`${backendUrl}/alumni/register`, {
         method: 'POST',
         body: submissionData,
       });
