@@ -83,7 +83,7 @@ const AlumniRegister = () => {
     submissionData.append('pgCertificate', formData.pgCertificate);
 
     try {
-      const response = await fetch('/api/alumni/register', {
+      const response = await fetch('https://asca360.onrender.com/api/alumni/register', {
         method: 'POST',
         body: submissionData,
       });
@@ -116,36 +116,36 @@ const AlumniRegister = () => {
         <form onSubmit={handleSubmit} className="alumni-form">
             <div className="form-group photo-upload">
                 <label htmlFor="photo">Profile Photo</label>
-                <input type="file" id="photo" name="photo" accept="image/*" onChange={handleFileChange} required />
+                <input type="file" id="photo" name="photo" accept="image/*" onChange={handleFileChange}  />
             </div>
             <div className="form-row">
                 <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleInputChange} required />
+                <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleInputChange}  />
                 </div>
                 <div className="form-group">
                 <label htmlFor="lastName">Last Name</label>
-                <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} required />
+                <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange}  />
                 </div>
             </div>
             <div className="form-group">
                 <label htmlFor="email">Email Address</label>
-                <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required />
+                <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange}  />
             </div>
             {/* --- NEW PASSWORD FIELDS --- */}
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" value={formData.password} onChange={handleInputChange} required />
+                <input type="password" id="password" name="password" value={formData.password} onChange={handleInputChange}  />
               </div>
               <div className="form-group">
                 <label htmlFor="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} required />
+                <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange}  />
               </div>
             </div>
             <div className="form-group">
                 <label htmlFor="graduationYear">Year of Graduation</label>
-                <select id="graduationYear" name="graduationYear" value={formData.graduationYear} onChange={handleInputChange} required>
+                <select id="graduationYear" name="graduationYear" value={formData.graduationYear} onChange={handleInputChange} >
                 <option value="" disabled>Select Year</option>
                 {years.map(year => <option key={year} value={year}>{year}</option>)}
                 </select>
@@ -202,7 +202,7 @@ const AlumniRegister = () => {
             </button>
             <div className="form-group certificate-upload">
                 <label htmlFor="pgCertificate">MCA PG Certificate (Mandatory)</label>
-                <input type="file" id="pgCertificate" name="pgCertificate" accept=".pdf,.jpg,.jpeg,.png" onChange={handleFileChange} required />
+                <input type="file" id="pgCertificate" name="pgCertificate" accept=".pdf,.jpg,.jpeg,.png" onChange={handleFileChange}  />
                 <small>Please upload your degree certificate. PDF or image formats are accepted.</small>
             </div>
           <button type="submit" className="submit-btn" disabled={isSubmitting}>

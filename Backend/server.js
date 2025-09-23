@@ -131,7 +131,7 @@ app.use('/api/events', eventRoutes);
 app.use('/api/finances', financeRoutes);
 app.use('/api/complaints', complaintsRoutes);
 app.use('/api/announcement', announcementRoutes);
-app.use('/api/funds', fundRoutes);
+app.use('/api/fund', fundRoutes);
 app.use('/api/alumni', alumniRoutes);
 app.use(cors({
   origin: '*', // allowed origins

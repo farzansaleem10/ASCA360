@@ -38,7 +38,7 @@ const FundRequest = () => {
         submittedBy: formData.studentName, // Using the name from the new input field
       };
 
-      const response = await fetch('https://asca360.onrender.com/api/funds', {
+      const response = await fetch('https://asca360.onrender.com/api/fund', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
