@@ -17,6 +17,7 @@ import ViewAnnouncements from './ViewAnnouncements';
 import Academics from './Academics';
 import Semester1 from './Semester1';
 import FundRequest from './FundRequest';
+import AlumniRegister from './AlumniRegister';
 
 
 
@@ -156,6 +157,7 @@ const App = () => {
              <Route path="/semester-1" element={<Semester1 />} />
             <Route path="/asca-committee" element={<AscaCommittee />} />
             <Route path="/fundrequest" element={<FundRequest />} />
+             <Route path="/alumni-register" element={<AlumniRegister />} />
           </Routes>
         </div>
      

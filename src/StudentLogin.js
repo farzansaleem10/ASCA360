@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // This component now accepts an 'onLogin' prop to handle a successful login.
 const StudentLogin = ({ onLogin }) => {
@@ -55,6 +56,11 @@ const StudentLogin = ({ onLogin }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {/* --- NEW CODE START --- */}
+    <div className="alumni-link-container">
+      <Link to="/alumni-register">Aluminee register</Link>
+    </div>
+    {/* --- NEW CODE END --- */}
         <button type="submit">LOGIN</button>
       </form>
       {message && <p className="message">{message}</p>}

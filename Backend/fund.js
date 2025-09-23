@@ -31,6 +31,7 @@ const FundRequest = mongoose.model('FundRequest', fundRequestSchema);
  * @access  Students
  */
 router.post('/', async (req, res) => {
+     console.log('Received fund request data:', req.body); 
   try {
     // Get the data from the frontend form submission
     const {studentName, eventName, purpose, amount, upiId, proofLink } = req.body;

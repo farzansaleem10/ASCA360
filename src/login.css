@@ -91,6 +91,22 @@ body{
   
   
 }
+.alumni-link-container {
+  text-align: right;
+  margin-bottom: 15px; /* Adds space between the link and the button */
+  margin-top: -10px; /* Pulls it up closer to the password field */
+}
+
+.alumni-link-container a {
+  color: var(--primary-color); /* Uses your existing theme color */
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.alumni-link-container a:hover {
+  text-decoration: underline;
+}
 
 .right-panel {
     width: 100%;
@@ -183,7 +199,7 @@ body{
 }
 
 .form-box button {
-    margin-top: 30px; /* Increased margin */
+   
     background-color: var(--accent-color);
     color: var(--bg-light);
     padding: 14px; /* More padding */
