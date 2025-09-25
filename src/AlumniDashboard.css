@@ -1,140 +1,251 @@
-.alumni-dashboard-layout {
-  display: flex;
-  min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+/* ---
+UI Theme & Style: Minimalist Fintech Dark Mode (Alumni Dashboard)
+Font: Inter (Geometric Sans-Serif)
+--- */
+
+/* 1. VARIABLES (Consistent with other pages) */
+:root {
+  --bg-primary: #111111;
+  --bg-card: #1C1C1C;
+  --accent-primary: #C4F82A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --text-on-accent: #111111;
+  --border-color: #333333;
 }
 
-.dashboard-sidebar {
-  width: 250px;
-  background-color: #1f2937;
-  color: #f9fafb;
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-}
-
-.dashboard-sidebar h2 {
-  margin: 0 0 2rem 0;
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-.dashboard-sidebar nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  flex-grow: 1;
-}
-
-.dashboard-sidebar nav button {
+/* 2. BASE LAYOUT */
+.dashboard-page-container {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background: none;
-  border: none;
-  color: #d1d5db;
-  text-align: left;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
 }
 
-.dashboard-sidebar nav button:hover {
-  background-color: #374151;
-  color: #ffffff;
+/* 3. HEADER & TABS */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
-.dashboard-sidebar nav button.active {
-  background-color: #4f46e5;
-  color: #ffffff;
+.dashboard-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.logout-btn {
+  padding: 10px 20px;
+  background-color: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.logout-button {
-  padding: 0.75rem 1rem;
-  background-color: #dc2626;
-  color: white;
+.logout-btn:hover {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.dashboard-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 1rem 1.5rem;
+  background-color: transparent;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
-}
-.logout-button:hover {
-    background-color: #b91c1c;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
 }
 
+.tab:hover {
+  color: var(--text-primary);
+}
+
+.tab.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+/* 4. MAIN CONTENT & CARDS */
 .dashboard-main-content {
-  flex: 1;
-  padding: 2rem 3rem;
-  background-color: #f3f4f6;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
 }
 
-.dashboard-content h2 {
-    font-size: 1.75rem;
-    color: #111827;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #d1d5db;
-    margin-bottom: 1.5rem;
+.profile-content-card, .announcements-content-card {
+  width: 100%;
 }
 
-.profile-details p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #374151;
+/* 5. PROFILE SECTION */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
 }
-.profile-details strong {
-    color: #1f2937;
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
 }
-.profile-details h4 {
-    margin-top: 1.5rem;
-    color: #4f46e5;
+
+.profile-header-info h2 {
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+.profile-subheader {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.profile-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.detail-group h4 {
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-group p {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.detail-group strong { color: var(--text-primary); }
+.detail-group a { color: var(--accent-primary); text-decoration: none; }
+.detail-group a:hover { text-decoration: underline; }
+
+/* 6. ANNOUNCEMENTS SECTION */
+.announcements-content-card {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+.announcement-form-container, .announcements-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.announcement-form-container h3, .announcements-list-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .announcement-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 600px;
-    margin-bottom: 2rem;
-}
-.announcement-form input,
-.announcement-form textarea {
-    padding: 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 1rem;
-}
-.announcement-form button {
-    padding: 0.75rem;
-    border: none;
-    border-radius: 6px;
-    background-color: #4f46e5;
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.announcements-list {
-    display: grid;
-    gap: 1rem;
+.announcement-form input, .announcement-form textarea {
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.announcement-form textarea { min-height: 120px; }
+.announcement-form input:focus, .announcement-form textarea:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(196, 248, 42, 0.2);
 }
 
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.primary-btn, .secondary-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-btn {
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent);
+  border: none;
+}
+.primary-btn:hover { background-color: #b3de26; }
+
+.secondary-btn {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+.secondary-btn:hover { background-color: var(--border-color); color: var(--text-primary); }
+
+.announcements-list { display: flex; flex-direction: column; gap: 1rem; }
 .announcement-item {
-    background-color: white;
-    padding: 1rem;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background-color: var(--bg-primary);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+.announcement-item h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.announcement-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
+.announcement-actions { margin-top: 1rem; display: flex; gap: 0.5rem; }
+.announcement-actions button {
+  background: var(--border-color);
+  color: var(--text-secondary);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.announcement-actions button:hover { color: var(--text-primary); }
+
+/* 7. RESPONSIVENESS */
+@media (max-width: 900px) {
+  .announcements-content-card {
+    grid-template-columns: 1fr;
+  }
 }
 
-.announcement-actions {
-    margin-top: 0.5rem;
-    display: flex;
-    gap: 0.5rem;
-}
-.announcement-actions button {
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px;
-    border: 1px solid #d1d5db;
-    background-color: #f9fafb;
-    cursor: pointer;
+@media (max-width: 600px) {
+  .dashboard-page-container { padding: 1rem; }
+  .dashboard-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .dashboard-main-content { padding: 1.5rem; }
+  .profile-header { flex-direction: column; align-items: flex-start; }
 }

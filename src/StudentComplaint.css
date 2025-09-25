@@ -1,5 +1,5 @@
 /* ---
-UI Theme & Style: Minimalist Fintech Dark Mode (Create Announcement Page)
+UI Theme & Style: Minimalist Fintech Dark Mode (Student Complaints Page)
 Font: Inter (Geometric Sans-Serif)
 --- */
 
@@ -15,7 +15,7 @@ Font: Inter (Geometric Sans-Serif)
 }
 
 /* 2. BASE LAYOUT */
-.announcement-container {
+.complaint-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -37,7 +37,7 @@ Font: Inter (Geometric Sans-Serif)
 /* 3. HEADER */
 .form-header {
   text-align: center;
-  margin-bottom: 2.5rem; /* Increased space */
+  margin-bottom: 2rem;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 1.5rem;
 }
@@ -56,11 +56,10 @@ Font: Inter (Geometric Sans-Serif)
 }
 
 /* 4. FORM & INPUT STYLES */
-/* --- FIX: Corrected class name from .event-form to .announcement-form --- */
-.announcement-form {
+.complaint-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Ensures space between form groups */
+  gap: 1.5rem;
 }
 
 .form-group {
@@ -72,11 +71,10 @@ Font: Inter (Geometric Sans-Serif)
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-secondary);
-  margin-bottom: 0.75rem; /* Increased space between label and input */
+  margin-bottom: 0.5rem;
 }
 
-.form-group input,
-.form-group textarea {
+.complaint-textarea {
   width: 100%;
   padding: 12px 16px;
   border: 1px solid var(--border-color);
@@ -86,15 +84,11 @@ Font: Inter (Geometric Sans-Serif)
   font-size: 1rem;
   box-sizing: border-box;
   transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.form-group textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 150px;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.complaint-textarea:focus {
   outline: none;
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px rgba(196, 248, 42, 0.2);
@@ -141,4 +135,3 @@ Font: Inter (Geometric Sans-Serif)
     padding: 1.5rem;
   }
 }
-

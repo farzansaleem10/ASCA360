@@ -1,135 +1,59 @@
 import React from "react";
-import "./Dashboard.css";
-import { Banknote, Wallet, CalendarDays, MessageSquareWarning, Megaphone } from "lucide-react";
+import "./Dashboard.css"; // Using the same theme stylesheet
+import { 
+    LayoutDashboard, 
+    PenSquare, 
+    HandCoins, 
+    CalendarDays, 
+    MessageSquareWarning, 
+    UserCheck, 
+    Megaphone 
+} from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
-const BalanceSheets = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="module-card">
-      <button
-        onClick={() => navigate('/balance-sheet')}
-        className="module-btn"
-      >
-        <Banknote size={18} />
-        View Balance Sheet
-      </button>
-    </div>
-  );
-};
-const RecordTransaction = () => (
-  <div className="module-card">
-    <button
-      onClick={() => alert('Add a Transaction...')}
-      className="module-btn"
-    >
-      <Banknote size={18} />
-      Record a Transaction
+// A reusable button component for the dashboard modules
+const ModuleButton = ({ onClick, icon, children }) => (
+    <button onClick={onClick} className="module-btn">
+        {icon}
+        <span>{children}</span>
     </button>
-  </div>
 );
 
+const DashBoard = ({ onLogout }) => {
+    const navigate = useNavigate();
 
-
-const FundRequest = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="module-card">
-      <button
-        onClick={() => navigate('/fundpending')}
-        className="module-btn"
-      >
-        <Banknote size={18} />
-        Fund Request
-      </button>
-    </div>
-  );
-};
-const Events = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="module-card">
-      <button
-        // When clicked, this button will now navigate to the '/events-admin' page.
-        onClick={() => navigate('/events-admin')}
-        className="module-btn"
-      >
-        <CalendarDays size={18} />
-        Events
-      </button>
-    </div>
-  );
-};
-const ComplaintRecieved = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="module-card">
-      <button
-        // When clicked, this button will now navigate to the '/events-admin' page.
-        onClick={() => navigate('/view-complaint')}
-        className="module-btn"
-      >
-        <CalendarDays size={18} />
-        View Complaints
-      </button>
-    </div>
-  );
-};
-const AlumniRequests = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="module-card">
-      <button
-        onClick={() => navigate('/alumnirequest')}
-        className="module-btn"
-      >
-        <Banknote size={18} />
-        Alumni Request
-      </button>
-    </div>
-  );
-};
-const CreateAnnouncement = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="module-card">
-      <button
-        // When clicked, this button will now navigate to the '/events-admin' page.
-        onClick={() => navigate('/add-announcement')}
-        className="module-btn"
-      >
-        <CalendarDays size={18} />
-        Add Announcement
-      </button>
-    </div>
-  );
-};
-const DashBoard = ({ userRole = "asca", onLogout = () => {} }) => {
-  const navigate = useNavigate();
-  
-  return (
-    <div className="dashboard-bg">
-      <div className="dashboard-container" style={{ position: "relative" }}>
-        <button className="logout-btn" onClick={onLogout}>Logout</button>
-        <header style={{ textAlign: "center", marginBottom: "24px" }}>
-          <h2 style={{ color: "#fff", fontSize: "2rem", fontWeight: "bold", letterSpacing: "1px" }}>
-            Welcome Asca Admin
-          </h2>
-        </header>
-        <main>
-          <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
-            <BalanceSheets />
-            <RecordTransaction />
-            <FundRequest />
-            <Events />
-            <ComplaintRecieved />
-            <AlumniRequests />
-            <CreateAnnouncement />
-          </div>
-        </main>
-      </div>
-    </div>
-  );
+    // --- All navigation logic is preserved below ---
+    return (
+        <div className="dashboard-page-container">
+            <header className="dashboard-header">
+                <h2>Welcome Asca Admin</h2>
+                <button className="logout-btn" onClick={onLogout}>Logout</button>
+            </header>
+            <main className="dashboard-grid">
+                <ModuleButton onClick={() => navigate('/balance-sheet')} icon={<LayoutDashboard size={20} />}>
+                    Balance Sheet
+                </ModuleButton>
+                <ModuleButton onClick={() => alert('Add a Transaction...')} icon={<PenSquare size={20} />}>
+                    Record a Transaction
+                </ModuleButton>
+                <ModuleButton onClick={() => navigate('/fundpending')} icon={<HandCoins size={20} />}>
+                    Fund Requests
+                </ModuleButton>
+                <ModuleButton onClick={() => navigate('/events-admin')} icon={<CalendarDays size={20} />}>
+                    Events
+                </ModuleButton>
+                <ModuleButton onClick={() => navigate('/view-complaint')} icon={<MessageSquareWarning size={20} />}>
+                    View Complaints
+                </ModuleButton>
+                <ModuleButton onClick={() => navigate('/alumnirequest')} icon={<UserCheck size={20} />}>
+                    Alumni Requests
+                </ModuleButton>
+                <ModuleButton onClick={() => navigate('/add-announcement')} icon={<Megaphone size={20} />}>
+                    Add Announcement
+                </ModuleButton>
+            </main>
+        </div>
+    );
 };
 
 export default DashBoard;

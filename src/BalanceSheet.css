@@ -1,198 +1,180 @@
-/* Override module-card styles for balance sheet */
-.module-card:has(.balance-sheet-container) {
-  display: block !important;
-  justify-content: initial !important;
-  align-items: initial !important;
-  padding: 20px !important;
-  width: 100% !important;
-  max-width: none !important;
+/* ---
+UI Theme & Style: Minimalist Fintech Dark Mode (Balance Sheet Page)
+Font: Inter (Geometric Sans-Serif)
+--- */
+
+/* 1. VARIABLES (Consistent with other pages) */
+:root {
+  --bg-primary: #111111;
+  --bg-card: #1C1C1C;
+  --accent-primary: #C4F82A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --border-color: #333333;
+  --credit-color: #4ade80; /* A vibrant green for credit */
+  --debit-color: #f87171;  /* A clear red for debit */
 }
 
-.balance-sheet-title {
+/* 2. BASE LAYOUT */
+.balance-sheet-page-container {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  background-color: var(--bg-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.balance-sheet-wrapper {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* 3. HEADER */
+.balance-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 1rem;
+}
+
+.header-title {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 20px;
-  color: #fff;
-  width: 100%;
-  text-align: center;
+  gap: 0.75rem;
+  color: var(--text-primary);
 }
 
-.balance-sheet-title {
-  font-size: 1.2rem;
-  font-weight: 600;
+.header-title h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
 }
 
-.balance-sheet-container {
+.refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.refresh-btn:hover:not(:disabled) {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+.refresh-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 4. CONTENT & TABLE CONTAINER */
+.balance-sheet-content {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.table-container {
   overflow-x: auto;
-  max-width: 100%;
   width: 100%;
-  margin-top: 20px;
 }
 
-.balance-table {
+.balance-sheet-table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  overflow: auto;
-  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.table-header {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  padding: 12px 8px;
+/* 5. TABLE STYLING */
+.balance-sheet-table th,
+.balance-sheet-table td {
+  padding: 1rem;
   text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+.balance-sheet-table th {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
   font-weight: 600;
-  font-size: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.table-cell {
-  padding: 12px 8px;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  font-size: 0.9rem;
-  vertical-align: middle;
+.balance-sheet-table td {
+  color: var(--text-primary);
+  font-size: 1rem;
 }
 
-.even-row {
-  background: rgba(255, 255, 255, 0.05);
+/* Zebra striping for better readability */
+.balance-sheet-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
-.odd-row {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-/* Grid styling for specific columns */
-.table-cell:nth-child(1) {
-  text-align: center;
-  font-weight: 600;
-  background: rgba(59, 130, 246, 0.1);
-  border-right: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.table-cell:nth-child(2) {
-  font-weight: 600;
-  border-right: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.table-cell:nth-child(3) {
-  border-right: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.table-cell:nth-child(4) {
-  text-align: right;
-  font-weight: 600;
-  border-right: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.table-cell:nth-child(5) {
-  text-align: right;
-  font-weight: 600;
-  border-right: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.table-cell:nth-child(6) {
-  text-align: center;
-}
-
-/* Special styling for total and balance rows */
-tr:has(.total-label) {
-  background: rgba(59, 130, 246, 0.15) !important;
-  border-top: 2px solid rgba(59, 130, 246, 0.4);
-}
-
-tr:has(.balance-label) {
-  background: rgba(251, 191, 36, 0.15) !important;
-  border-top: 2px solid rgba(251, 191, 36, 0.4);
-}
-
+/* 6. CELL-SPECIFIC STYLES (Credit, Debit, Proof Link) */
 .amount {
   font-weight: 600;
-  font-family: 'Courier New', monospace;
-  padding: 4px 8px;
-  border-radius: 4px;
-  display: inline-block;
-  min-width: 80px;
-  text-align: right;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 }
-
 .amount.credit {
-  color: #4ade80;
-  background: rgba(74, 222, 128, 0.1);
-  border: 1px solid rgba(74, 222, 128, 0.3);
+  color: var(--credit-color);
 }
-
 .amount.debit {
-  color: #f87171;
-  background: rgba(248, 113, 113, 0.1);
-  border: 1px solid rgba(248, 113, 113, 0.3);
-}
-
-.balance-label {
-  color: #fbbf24;
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
-.total-label {
-  color: #60a5fa;
-  font-size: 1.1rem;
-  font-weight: 700;
+  color: var(--debit-color);
 }
 
 .proof-link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  color: #60a5fa;
+  gap: 0.5rem;
+  color: var(--accent-primary);
   text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  background: rgba(96, 165, 250, 0.1);
-  border: 1px solid rgba(96, 165, 250, 0.3);
-  transition: all 0.2s;
-  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.2s;
 }
-
 .proof-link:hover {
-  background: rgba(96, 165, 250, 0.2);
-  color: #93c5fd;
-  border-color: rgba(96, 165, 250, 0.5);
-  transform: translateY(-1px);
+  color: var(--text-primary);
+  text-decoration: underline;
 }
 
-/* Hover effects for table rows */
-.balance-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  transition: background 0.2s ease;
+/* 7. STATUS & SPINNER */
+.status-message {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+}
+.status-message.error {
+  color: var(--debit-color);
 }
 
-/* Responsive design */
+.spinner {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 8. RESPONSIVE STYLES */
 @media (max-width: 768px) {
-  .balance-table {
-    font-size: 0.8rem;
+  .balance-sheet-page-container {
+    padding: 1.5rem 0.5rem;
   }
-  
-  .table-cell, .table-header {
-    padding: 8px 4px;
+  .balance-sheet-content {
+    padding: 1rem;
   }
-  
-  .balance-sheet-title {
-    font-size: 1rem;
-  }
-  
-  .amount {
-    min-width: 60px;
-    font-size: 0.8rem;
-  }
-  
-  .proof-link {
-    padding: 4px 8px;
-    font-size: 0.8rem;
+  .header-title h1 {
+    font-size: 1.5rem;
   }
 }

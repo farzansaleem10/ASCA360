@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import './FundRequest.css';
+import './FundRequest.css'; // Using the new stylesheet
 import backendUrl from './config';
 
-// The component no longer needs the userName prop
 const FundRequest = () => {
+  // All existing state and form logic is preserved
   const [formData, setFormData] = useState({
-    studentName: '', // New field for the student's name
+    studentName: '',
     eventName: '',
     purpose: '',
     amount: '',
@@ -29,21 +29,18 @@ const FundRequest = () => {
     setMessage('');
 
     try {
-      // The backend expects a 'submittedBy' field, which now comes from the form
       const submissionData = {
         eventName: formData.eventName,
         purpose: formData.purpose,
         amount: formData.amount,
         upiId: formData.upiId,
         proofLink: formData.proofLink,
-        submittedBy: formData.studentName, // Using the name from the new input field
+        submittedBy: formData.studentName,
       };
 
       const response = await fetch(`${backendUrl}/funds`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submissionData),
       });
 
@@ -51,7 +48,6 @@ const FundRequest = () => {
 
       if (response.ok && result.success) {
         setMessage('Fund request submitted successfully!');
-        // Reset the form after successful submission
         setFormData({
           studentName: '',
           eventName: '',
@@ -71,15 +67,15 @@ const FundRequest = () => {
     }
   };
 
+  // JSX is updated with new classNames for the fintech theme
   return (
-    <div className="fund-request-wrapper">
-      <div className="fund-request-container">
-        <h1 className="fund-request-title">Fund Request</h1>
-        <p className="fund-request-subtitle">
-          Submit the details of the expenditure for reimbursement.
-        </p>
+    <div className="fund-request-container">
+      <div className="form-wrapper">
+        <div className="form-header">
+          <h1>Fund Request</h1>
+          <p>Submit expenditure details for reimbursement.</p>
+        </div>
         <form className="fund-request-form" onSubmit={handleSubmit}>
-          {/* New input field for Student Name */}
           <div className="form-group">
             <label htmlFor="studentName">Student Name</label>
             <input
@@ -150,11 +146,10 @@ const FundRequest = () => {
             {isSubmitting ? 'Submitting...' : 'Submit Request'}
           </button>
         </form>
-        {message && <p className="success-message">{message}</p>}
+        {message && <p className="form-message">{message}</p>}
       </div>
     </div>
   );
 };
 
 export default FundRequest;
-

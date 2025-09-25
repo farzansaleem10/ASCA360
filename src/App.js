@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate
+  Navigate,
 } from "react-router-dom";
 
 import Login from "./Login";
@@ -26,7 +26,7 @@ import FundPending from "./FundPending";
 import AlumniRequests from "./AlumniRequest";
 import Community from "./Community";
 import AlumniLogin from "./AlumniLogin";
-import AlumniDashboard from "./AlumniDashboard"; // Make sure this is imported
+import AlumniDashboard from "./AlumniDashboard";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -56,56 +56,54 @@ const App = () => {
     setUserName("");
     setUserRole("");
   };
-
   const renderForm = () => <Login onLogin={handleLogin} />;
-
-  // --- NEW: Centralized function to render the correct dashboard ---
   const renderDashboard = () => {
-    switch(userRole) {
-      case 'alumni':
+    switch (userRole) {
+      case "alumni":
         return <AlumniDashboard userName={userName} onLogout={handleLogout} />;
-      case 'student':
-      case 'mca-student':
+      case "student":
+      case "mca-student":
         return <StudentDashboard userName={userName} onLogout={handleLogout} />;
-      case 'asca':
-      case 'committee':
-        return <Dashboard userName={userName} userRole={userRole} onLogout={handleLogout} />;
+      case "asca":
+      case "committee":
+        return (
+          <Dashboard
+            userName={userName}
+            userRole={userRole}
+            onLogout={handleLogout}
+          />
+        );
       default:
         // If logged in but role is unknown, redirect to the main login
         return <Navigate to="/login" />;
     }
   };
 
-
   return (
     <Router>
-      {/* Your PWA Install prompt JSX can remain here */}
-
       <div className="container">
         <div className="right-panel">
           <Routes>
-            {/* --- FIX #1: The main route now handles all logged-in roles --- */}
             <Route
               path="/"
-              element={
-                !isLoggedIn ? (
-                  renderForm()
-                ) : (
-                  renderDashboard()
-                )
-              }
+              element={!isLoggedIn ? renderForm() : renderDashboard()}
             />
-
-            {/* --- FIX #2: This route now correctly redirects to the main page after login --- */}
             <Route
               path="/alumni-login"
               element={
-                !isLoggedIn ? <AlumniLogin onLogin={handleLogin} /> : <Navigate to="/" />
+                !isLoggedIn ? (
+                  <AlumniLogin onLogin={handleLogin} />
+                ) : (
+                  <Navigate to="/" />
+                )
               }
             />
-
-            {/* Your other routes */}
-            <Route path="/alumni-dashboard" element={<AlumniDashboard userName={userName} onLogout={handleLogout} />} />
+            <Route
+              path="/alumni-dashboard"
+              element={
+                <AlumniDashboard userName={userName} onLogout={handleLogout} />
+              }
+            />
             <Route path="/balance-sheet" element={<BalanceSheetDetails />} />
             <Route path="/events-admin" element={<AddEvent />} />
             <Route path="/events" element={<ViewEvents />} />
@@ -129,4 +127,3 @@ const App = () => {
 };
 
 export default App;
-

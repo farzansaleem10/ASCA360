@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
-import './StudentComplaints.css';
+import './StudentComplaints.css'; // Using the new stylesheet
+import backendUrl from './config';
 
-// This component now contains the form for students to file a complaint.
 const StudentComplaints = () => {
-  // State to hold the user's complaint text
+  // All existing state and logic is preserved
   const [complaintText, setComplaintText] = useState('');
-  // State for displaying success, error, or loading messages
   const [message, setMessage] = useState('');
-  // State to track if the form is currently submitting
   const [loading, setLoading] = useState(false);
 
-  // Function to handle the form submission
   const handleSubmit = async (e) => {
-    // Prevent the default form submission to avoid a page reload
     e.preventDefault();
     setLoading(true);
     setMessage('');
     
-    // In a real application, the user's name would come from the logged-in state.
-    // We are hardcoding it here to match the backend logic for this example.
-    const author = "Asca Student";
+    // In a real app, user's name would come from auth state.
+    const author = "Asca Student"; 
     
     try {
-      // Make a POST request to the backend's complaints endpoint
-      const response = await fetch('https://asca360.onrender.com/api/complaints', {
+      const response = await fetch(`${backendUrl}/complaints`, { // Using backendUrl
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ author, text: complaintText }),
@@ -32,40 +26,40 @@ const StudentComplaints = () => {
       const data = await response.json();
       
       if (response.ok) {
-        // If the response is successful, display a success message and clear the form
-        setMessage(data.message);
+        setMessage(data.message || "Complaint submitted successfully!");
         setComplaintText('');
       } else {
-        // If the response is not OK, display the error message from the backend
         setMessage(data.message || 'Failed to submit complaint.');
       }
     } catch (error) {
       console.error('Network Error:', error);
       setMessage('A network error occurred. Please try again.');
     } finally {
-      // Set loading to false once the request is complete
       setLoading(false);
     }
   };
 
+  // JSX is updated with new classNames for the fintech theme
   return (
     <div className="complaint-container">
-      <div className="complaint-card">
-        <h2 className="complaint-title">
-          File a Complaint
-        </h2>
-        <p className="complaint-subtitle">
-          We are here to help. Please describe your issue below.
-        </p>
+      <div className="form-wrapper">
+        <div className="form-header">
+          <h1>File a Complaint</h1>
+          <p>We are here to help. Please describe your issue below.</p>
+        </div>
         
         <form onSubmit={handleSubmit} className="complaint-form">
-          <textarea
-            className="complaint-textarea"
-            placeholder="Tell us what's on your mind..."
-            value={complaintText}
-            onChange={(e) => setComplaintText(e.target.value)}
-            required
-          ></textarea>
+          <div className="form-group">
+            <label htmlFor="complaintText">Your Complaint</label>
+            <textarea
+              id="complaintText"
+              className="complaint-textarea"
+              placeholder="Tell us what's on your mind..."
+              value={complaintText}
+              onChange={(e) => setComplaintText(e.target.value)}
+              required
+            ></textarea>
+          </div>
           
           <button
             type="submit"
@@ -77,7 +71,7 @@ const StudentComplaints = () => {
         </form>
         
         {message && (
-          <p className={`complaint-message ${message.includes('success') ? 'success' : 'error'}`}>
+          <p className="form-message">
             {message}
           </p>
         )}

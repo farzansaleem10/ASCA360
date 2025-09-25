@@ -1,116 +1,113 @@
 import React, { useState } from 'react';
+import './AddEvent.css'; // Using the new stylesheet
+import backendUrl from './config'; // Assuming you might use this, though the fetch URL is hardcoded
 
-// This component provides the form for ASCA/Committee members to create an event.
 const AddEvent = () => {
-  // State hooks to store the values from the form inputs
-  const [eventName, setEventName] = useState('');
-  const [date, setDate] = useState('');
-  const [description, setDescription] = useState('');
-  const [driveFolderUrl, setDriveFolderUrl] = useState(''); 
-  
-  // State for showing messages (e.g., "Event created successfully!") to the user
-  const [message, setMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+    // All existing state and form logic is preserved
+    const [eventName, setEventName] = useState('');
+    const [date, setDate] = useState('');
+    const [description, setDescription] = useState('');
+    const [driveFolderUrl, setDriveFolderUrl] = useState('');
+    const [message, setMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-  // This function is called when the user clicks the "Create Event" button
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevents the browser from reloading the page on submit
-    setIsLoading(true);
-    setMessage('');
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setMessage('');
 
-    // 1. Create a JavaScript object with the data from the form
-    const eventData = {
-      eventName,
-      date,
-      description,
-      driveFolderUrl,
-      createdBy: 'Admin User', // In a real app, you would get this from your login state
+        const eventData = {
+            eventName,
+            date,
+            description,
+            driveFolderUrl,
+            createdBy: 'Admin User',
+        };
+
+        try {
+            const response = await fetch(`${backendUrl}/events`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(eventData),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setMessage('Event created successfully!');
+                setEventName('');
+                setDate('');
+                setDescription('');
+                setDriveFolderUrl('');
+            } else {
+                setMessage(data.message || 'Failed to create event.');
+            }
+        } catch (error) {
+            console.error('Network Error:', error);
+            setMessage('A network error occurred. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    try {
-      // 2. Send the data to your backend API endpoint
-      const response = await fetch('https://asca360.onrender.com/api/events', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json', // Tell the server we're sending JSON
-        },
-        body: JSON.stringify(eventData), // Convert the JavaScript object to a JSON string
-      });
-
-      const data = await response.json();
-
-      // 3. Handle the response from the server
-      if (data.success) {
-        setMessage('Event created successfully!');
-        // Clear the form for the next entry
-        setEventName('');
-        setDate('');
-        setDescription('');
-        setDriveFolderUrl('');
-      } else {
-        setMessage(data.message || 'Failed to create event.');
-      }
-    } catch (error) {
-      console.error('Network Error:', error);
-      setMessage('A network error occurred. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // This is the JSX that renders the HTML form
-  return (
-    <div style={{ maxWidth: '600px', margin: '2rem auto', padding: '2rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-      <h2>Create New Event</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Event Name</label>
-          <input
-            type="text"
-            value={eventName}
-            onChange={(e) => setEventName(e.target.value)}
-            required
-            style={{ width: '100%', padding: '8px', marginTop: '4px' }}
-          />
+    // The JSX is updated to use classNames instead of inline styles
+    return (
+        <div className="add-event-container">
+            <div className="form-wrapper">
+                <header className="form-header">
+                    <h1>Create New Event</h1>
+                    <p>Fill out the details below to add a new event.</p>
+                </header>
+                <form onSubmit={handleSubmit} className="event-form">
+                    <div className="form-group">
+                        <label htmlFor="eventName">Event Name</label>
+                        <input
+                            id="eventName"
+                            type="text"
+                            value={eventName}
+                            onChange={(e) => setEventName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="date">Date</label>
+                        <input
+                            id="date"
+                            type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            id="description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            required
+                            rows="4"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="driveFolderUrl">Google Drive Folder URL</label>
+                        <input
+                            id="driveFolderUrl"
+                            type="url"
+                            placeholder="https://drive.google.com/..."
+                            value={driveFolderUrl}
+                            onChange={(e) => setDriveFolderUrl(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="submit-btn" disabled={isLoading}>
+                        {isLoading ? 'Creating...' : 'Create Event'}
+                    </button>
+                </form>
+                {message && <p className="form-message">{message}</p>}
+            </div>
         </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Date</label>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-            style={{ width: '100%', padding: '8px', marginTop: '4px' }}
-          />
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Description</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-            rows="4"
-            style={{ width: '100%', padding: '8px', marginTop: '4px' }}
-          />
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Google Drive Folder URL</label>
-          <input
-            type="url"
-            placeholder="https://drive.google.com/..."
-            value={driveFolderUrl}
-            onChange={(e) => setDriveFolderUrl(e.target.value)}
-            required
-            style={{ width: '100%', padding: '8px', marginTop: '4px' }}
-          />
-        </div>
-        <button type="submit" disabled={isLoading} style={{ padding: '10px 20px', cursor: 'pointer' }}>
-          {isLoading ? 'Creating...' : 'Create Event'}
-        </button>
-      </form>
-      {message && <p style={{ marginTop: '1rem', color: message.includes('success') ? 'green' : 'red' }}>{message}</p>}
-    </div>
-  );
+    );
 };
 
 export default AddEvent;

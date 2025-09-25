@@ -1,412 +1,213 @@
-/* style.css */
+/* ---
+UI Theme & Style: Minimalist Fintech Dark Mode
+Font: Inter (Geometric Sans-Serif)
+--- */
 
-/* Google Fonts: Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* 1. FONT IMPORT & VARIABLES */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* Base styles and variables */
 :root {
-    --primary-color: #009999;
-    --primary-dark: #008080;
-    --accent-color: #00a2a2;
-    --text-dark: #333;
-    --text-light: #f0f0f0;
-    --bg-light: #ffffff;
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-medium: rgba(0, 0, 0, 0.2);
+  /* Color Palette */
+  --bg-primary: #111111;      /* Deep Charcoal / Off-Black */
+  --bg-card: #1C1C1C;          /* Lighter Dark Grey for cards */
+  --accent-primary: #C4F82A;   /* Bright Lime Green / Chartreuse */
+  --text-primary: #FFFFFF;     /* Crisp White */
+  --text-secondary: #A1A1AA;   /* Light Grey for subtitles, labels */
+  --text-on-accent: #111111; /* Dark text for light buttons */
+  --border-color: #333333;      /* Subtle border for definition */
+  --error-color: #ff4d4d;
 }
 
-html, body {
-    background-color: #333;
-  margin-top: 0;
+/* 2. BASE & RESET STYLES */
+* {
+  box-sizing: border-box;
+  margin: 0;
   padding: 0;
+}
+
+html, body, #root {
   width: 100%;
-  height: 100%; 
-  font-family: 'Inter', Arial, sans-serif;
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body{
-    overflow-y: auto;
+/* 3. MAIN LAYOUT CONTAINER */
+.login-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem; /* Padding for mobile */
 }
 
-
-
-/* Container setup */
-
-/* Left panel styling */
-
-/* .logo-section {
-    display: flex;
-    align-items: center;
-    margin-bottom: 60px; 
-} */
-/* 
-.logo {
-    height: 50px; 
-    width: 50px;
-    background-color: var(--bg-light);
-    border-radius: 50%;
-    margin-right: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 5px var(--shadow-light);
-    font-size: 28px;
-    color: var(--primary-color); 
-    font-weight: bold; 
-} */
-
-/* .brand {
-    font-size: 32px;
-    font-weight: 700; 
-    letter-spacing: 0.5px;
-    text-align: center;
-} */
-
-/* .login-options {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 100%;
-}
-
-.login-item {
-    font-size: 18px;
-    font-weight: 500;
-    margin-left: 65px;
-    cursor: pointer;
-    transition: color 0.2s ease-in-out;
-    padding: 10px 0;
-}
-
-.login-item:hover {
-    color: var(--bg-light);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-} */
-
-/* Right panel styling */
-.container {
-  text-align: center;
-  
-  
-}
-
-
-.right-panel {
-    width: 100%;
-    flex: 1;
-   
-    min-height: 100dvh;
-    margin: 0;
-    
-    /* background: url("https://placehold.co/1200x800/009999/ffffff?text=Background+Image") center center / cover no-repeat; Placeholder image */
-    background-color: #333;
-    /* position: relative; */
-    display: flex;
-    /* justify-content: center;*/
-    align-items: center; 
-    flex-direction: column;
-    padding: 0;
-    overflow-y: auto;
-    
-}
-
-
-
-
-/* Overlay for background image to improve contrast */
-/* .right-panel::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3); 
-    z-index: 0;
-} */
-
-/* .language {
-    position: absolute;
-    top: 25px;
-    right: 35px;
-    color: var(--text-light);
-    font-size: 15px;
-    font-weight: 500;
-    z-index: 1; 
-} */
- .form-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    gap: 10px;
- }
-
-.form-box {
-    width: 90%;        /* responsive on mobile */
-    max-width: 450px;  /* desktop limit */
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: 30px;
-    padding-right: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px var(--shadow-medium);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    
-    
-}
-
-.form-box h2 {
-    margin-bottom: 30px; /* Increased margin */
-    font-size: 28px; /* Larger heading */
-    font-weight: 700;
-    color: var(--text-dark);
-    text-align: center;
-}
-
-.form-box form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Increased gap */
-}
-
-.form-box input {
-    padding: 12px 15px; /* More padding */
-    border: 1px solid #ddd; /* Solid border */
-    border-radius: 8px; /* Rounded input fields */
-    background-color: var(--bg-light);
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.form-box input::placeholder {
-    color: #999;
-}
-
-.form-box input:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(0, 153, 153, 0.2); /* Focus ring */
-       
-}
-
-.form-box button {
-   
-    background-color: var(--accent-color);
-    color: var(--bg-light);
-    padding: 14px; /* More padding */
-    border: none;
-    border-radius: 30px; /* More rounded */
-    font-size: 18px; /* Larger text */
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 153, 153, 0.3); /* Button shadow */
-        
-}
-
-.form-box button:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-3px); /* Lift effect */
-    box-shadow: 0 6px 15px rgba(0, 153, 153, 0.4);
-      
-}
-
-.login-link {
-    margin-top: 25px; /* Increased margin */
-    font-size: 15px;
-    color: #666;
-    text-align: center;
-     
-}
-
-.login-link span {
-    color: var(--primary-color);
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.2s ease-in-out;
-      
-}
-.committee-image {
+/* 4. LOGIN CARD & WRAPPER */
+.login-form-wrapper {
   width: 100%;
-  height: auto;
-  /* margin-top: 20px; */
-  border-radius: 10px;
-     
-}
-.install-app-card-container {
-    position: fixed;
-    bottom: 1.25rem;
-    right: 10px;
-    z-index: 1000;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-    
+  max-width: 420px;
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  overflow: hidden; /* Keeps tabs inside rounded corners */
+  display: flex;
+  flex-direction: column;
 }
 
-.install-app-card {
-    background-color: #fff;
-    border-radius: 0.75rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    width: 100%;
-    
-    max-width: 360px;
-    overflow: hidden;
-    border: 1px solid #e5e7eb;
- 
-}
-
-.install-app-card__header {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #f3f4f6;
-        
-    
-}
-
-.install-app-card__icon {
-    margin-right: 0.75rem;
-    color: #3b82f6;
-}
-
-.install-app-card__title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin: 0;
-}
-
-.install-app-card__close {
-    margin-left: auto;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #9ca3af;
-    padding: 0.25rem;
-}
-
-.install-app-card__close:hover {
-    color: #1f2937;
-}
-
-.install-app-card__body {
-    padding: 1rem;
-}
-
-.install-app-card__content {
-    font-size: 0.875rem;
-    color: #4b5563;
-    line-height: 1.5;
-    margin: 0;
-}
-
-.install-app-card__actions {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0.75rem 1rem;
-    background-color: #f9fafb;
-    border-top: 1px solid #f3f4f6;
-    gap: 0.5rem;
-        
-}
-
-.install-app-card__button {
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: background-color 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-     
-}
-
-.install-app-card__button--primary {
-    background-color: #3b82f6;
-    color: #fff;
-       
-}
-
-.install-app-card__button--primary:hover {
-    background-color: #2563eb;
-        
-}
-
-.install-app-card__button--secondary {
-    background-color: #fff;
-    color: #374151;
-    border-color: #d1d5db;
-       
-}
-
-.install-app-card__button--secondary:hover {
-    background-color: #f3f4f6;
-   
-}
-
+/* 5. TABS STYLING */
 .form-tabs {
-    display: flex;
-    background-color: #009999;
+  display: flex;
+  background-color: transparent;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .tab {
-    flex: 1;
-    padding: 1rem;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-light);
-    transition: all 0.2s ease-in-out;
+  flex: 1;
+  padding: 16px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border-bottom: 2px solid transparent;
 }
 
-/* Style for the active tab */
-.tab.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
+.tab:hover {
+  color: var(--text-primary);
 }
-.login-form-wrapper {
-    width: 100%;
-    max-width: 450px;
-    background: var(--bg-card);
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* This keeps the tabs contained within the rounded corners */
-    margin: 1rem;
+
+.tab.active {
+  color: var(--accent-primary);
+  border-bottom: 2px solid var(--accent-primary);
+}
+
+/* 6. FORM BOX & CONTENT */
+.form-box {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Space between elements */
+}
+
+.form-box h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.form-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.form-box input {
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-box input::placeholder {
+  color: #555;
+}
+
+.form-box input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(196, 248, 42, 0.2);
+}
+
+/* 7. BUTTON & LINKS */
+.form-box button[type="submit"] {
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent);
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.form-box button[type="submit"]:hover {
+  background-color: #b3de26; /* Slightly darker shade on hover */
+  transform: translateY(-2px);
 }
 
 .forgot {
   text-align: right;
-  margin-bottom: 15px; /* Adds space between the link and the button */
-  margin-top: -10px; /* Pulls it up closer to the password field */
+  margin-top: -10px;
 }
 
-.forgot a {
-  color: var(--primary-color); /* Uses your existing theme color */
-  font-size: 14px;
+.forgot a, .signup-link a {
+  color: var(--accent-primary);
+  font-size: 0.875rem;
   text-decoration: none;
   font-weight: 500;
 }
 
-.forgot a:hover {
+.forgot a:hover, .signup-link a:hover {
   text-decoration: underline;
 }
+
+.signup-link {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* 8. MESSAGE & RESPONSIVENESS */
+.message {
+  text-align: center;
+  color: var(--error-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* For smaller screens */
+@media (max-width: 480px) {
+  .form-box {
+    padding: 1.5rem;
+  }
+  .form-box h2 {
+    font-size: 1.75rem;
+  }
+}
 .alumni-link-container {
-    display: flex;
+  display: flex;
   justify-content: space-between;
-  margin-bottom: 15px; /* Adds space between the link and the button */
-  margin-top: -10px; /* Pulls it up closer to the password field */
+  margin-top: -10px;
 }
 
 .alumni-link-container a {
-  color: var(--primary-color); /* Uses your existing theme color */
-  font-size: 14px;
+  color: var(--accent-primary);
+  font-size: 0.875rem;
   text-decoration: none;
   font-weight: 500;
 }

@@ -1,5 +1,5 @@
 /* ---
-UI Theme & Style: Minimalist Fintech Dark Mode (View Announcements Page)
+UI Theme & Style: Minimalist Fintech Dark Mode (View Events Page)
 Font: Inter (Geometric Sans-Serif)
 --- */
 
@@ -7,6 +7,7 @@ Font: Inter (Geometric Sans-Serif)
 :root {
   --bg-primary: #111111;
   --bg-card: #1C1C1C;
+  --accent-primary: #C4F82A;
   --text-primary: #FFFFFF;
   --text-secondary: #A1A1AA;
   --border-color: #333333;
@@ -14,7 +15,7 @@ Font: Inter (Geometric Sans-Serif)
 }
 
 /* 2. BASE LAYOUT */
-.announcements-container {
+.view-events-container {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
@@ -26,60 +27,92 @@ Font: Inter (Geometric Sans-Serif)
 }
 
 /* 3. HEADER */
-.announcements-header {
+.events-header {
   text-align: center;
   margin-bottom: 3rem;
 }
 
-.announcements-header h1 {
+.events-header h1 {
   font-size: 2.5rem;
   font-weight: 700;
   margin: 0 0 0.5rem 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.announcements-header p {
+.events-header p {
   font-size: 1.125rem;
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
 }
 
-/* 4. ANNOUNCEMENTS LIST & ITEMS */
-.announcements-content {
+/* 4. EVENTS LIST & CARDS */
+.events-content {
   width: 100%;
 }
 
-.announcements-list {
+.events-list {
   display: grid;
   gap: 1.5rem;
 }
 
-.announcement-item {
+.event-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.announcement-item-title {
+.event-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.event-card-header h3 {
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin: 0 0 1rem 0;
+  margin: 0;
 }
 
-.announcement-item-content {
+.event-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.event-description {
   color: var(--text-secondary);
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
+  flex-grow: 1;
 }
 
-.announcement-item-meta {
-  text-align: right;
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-style: italic;
-  opacity: 0.7;
+.event-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--accent-primary);
+  font-weight: 600;
+  align-self: flex-start; /* Aligns button to the left */
+  transition: color 0.2s;
+}
+
+.event-link:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
 }
 
 /* 5. STATUS MESSAGES (Loading, Error, Empty) */
@@ -99,10 +132,15 @@ Font: Inter (Geometric Sans-Serif)
 
 /* 6. RESPONSIVE STYLES */
 @media (max-width: 768px) {
-  .announcements-container {
+  .view-events-container {
     padding: 1.5rem 1rem;
   }
-  .announcements-header h1 {
+  .events-header h1 {
     font-size: 2rem;
+  }
+  .event-card-header {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
   }
 }

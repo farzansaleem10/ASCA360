@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CreateAnnouncement.css';
-
+import backendUrl from './config';
 // Component for admins to create a new announcement
 const CreateAnnouncement = () => {
   const [title, setTitle] = useState('');
@@ -25,7 +25,7 @@ const CreateAnnouncement = () => {
     console.log('Sending payload to backend:', payload);
     
     try {
-      const response = await fetch('https://asca360.onrender.com/api/announcement', {
+      const response = await fetch(`${backendUrl}/announcement`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -1,53 +1,78 @@
-/* Main container and header */
-.community-container {
-  padding: 2rem 4rem;
-  max-width: 1400px;
-  margin: 1rem auto;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: #f8f9fa;
+/* ---
+UI Theme & Style: Minimalist Fintech Dark Mode (Community Page)
+Font: Inter (Geometric Sans-Serif)
+--- */
+
+/* 1. VARIABLES (Consistent with other pages) */
+:root {
+  --bg-primary: #111111;
+  --bg-card: #1C1C1C;
+  --accent-primary: #C4F82A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --border-color: #333333;
+  --error-color: #ef4444;
 }
 
+/* 2. BASE LAYOUT */
+.community-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+}
+
+/* 3. HEADER & FILTERS */
 .community-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #dee2e6;
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 .community-header h1 {
-  font-size: 1.75rem;
-  color: #343a40;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
 }
 
-.filters select {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  border: 1px solid #ced4da;
+.filter-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.year-filter-select {
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
   font-size: 1rem;
+  cursor: pointer;
 }
 
-/* Alumni Grid */
+/* 4. ALUMNI GRID & CARDS */
 .alumni-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
 }
 
 .alumni-card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
   text-align: center;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .alumni-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  border-color: var(--accent-primary);
 }
 
 .alumni-photo {
@@ -55,42 +80,44 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 1rem;
-  border: 3px solid #e9ecef;
+  margin: 0 auto 1rem;
+  border: 3px solid var(--border-color);
 }
 
 .alumni-info h3 {
   margin: 0.5rem 0;
-  font-size: 1.1rem;
-  color: #212529;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .alumni-info p {
   margin: 0;
-  color: #6c757d;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
-/* Profile Modal Styles */
+/* 5. PROFILE MODAL STYLES */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
+  backdrop-filter: blur(5px);
 }
 
 .modal-content {
-  background: white;
-  border-radius: 12px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
   width: 90%;
-  max-width: 400px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
   position: relative;
   animation: fadeIn 0.3s ease-out;
 }
@@ -102,23 +129,21 @@
 
 .modal-close-btn {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 15px;
   background: none;
   border: none;
   font-size: 2rem;
-  color: #adb5bd;
+  color: var(--text-secondary);
   cursor: pointer;
+  line-height: 1;
 }
 
 .modal-header {
-  background-color: #f1f3f5;
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  height: 120px;
+  background-color: var(--bg-primary);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 }
 
 .modal-profile-pic {
@@ -126,9 +151,11 @@
   height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid white;
-  transform: translateY(50%);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border: 5px solid var(--bg-card);
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .modal-body {
@@ -137,30 +164,71 @@
 }
 
 .modal-body h2 {
-  margin: 0 0 0.25rem;
+  margin: 1rem 0 0.25rem;
+  color: var(--text-primary);
 }
 
-.modal-body p {
-  margin: 0 0 1rem;
-  color: #6c757d;
+.modal-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.work-info {
+    background-color: var(--bg-primary);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+.work-info p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+.work-info strong {
+    color: var(--text-primary);
 }
 
 .contact-links {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e9ecef;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .contact-links a {
   text-decoration: none;
-  color: #007bff;
+  color: var(--accent-primary);
   font-weight: 500;
 }
 
-.error-message {
+.details-section {
+    margin-top: 1.5rem;
+    text-align: left;
+}
+.details-section h4 {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+.details-section p {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* 6. STATUS MESSAGES */
+.status-message {
   text-align: center;
-  color: #dc3545;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  padding: 2rem;
+}
+
+.status-message.error {
+  color: var(--error-color);
 }

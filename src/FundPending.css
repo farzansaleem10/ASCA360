@@ -1,51 +1,83 @@
+/* ---
+UI Theme & Style: Minimalist Fintech Dark Mode (Fund Pending Page)
+Font: Inter (Geometric Sans-Serif)
+--- */
+
+/* 1. VARIABLES (Consistent with other pages) */
+:root {
+  --bg-primary: #111111;
+  --bg-card: #1C1C1C;
+  --accent-primary: #C4F82A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --text-on-accent: #111111;
+  --border-color: #333333;
+  --status-approved: #22c55e; /* Green */
+  --status-rejected: #ef4444;  /* Red */
+  --status-pending: #f59e0b;   /* Amber */
+  --status-completed: #6366f1; /* Indigo */
+}
+
+/* 2. BASE LAYOUT */
 .fund-pending-container {
-  padding: 2rem;
-  max-width: 900px;
-  margin: 2rem auto;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: #f9fafb;
-  border-radius: 12px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  min-height: 100vh;
 }
 
-.fund-pending-title {
+/* 3. HEADER */
+.fund-pending-header {
   text-align: center;
-  color: #111827;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  font-weight: 700;
+  margin-bottom: 3rem;
 }
 
+.fund-pending-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.fund-pending-header p {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 4. REQUESTS LIST & CARDS */
 .requests-list {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
 }
 
 .request-card {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.2s ease-in-out;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Ensures child elements respect border-radius */
 }
 
-.request-card:hover {
-    transform: translateY(-5px);
-}
-
+/* 5. CARD CONTENT STYLING */
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
-  background-color: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .card-header h3 {
   margin: 0;
   font-size: 1.25rem;
-  color: #1f2937;
+  font-weight: 600;
 }
 
 .status-badge {
@@ -55,99 +87,83 @@
   font-weight: 600;
   text-transform: capitalize;
 }
-
-.status-badge.status-pending {
-  background-color: #fef3c7;
-  color: #92400e;
-}
-.status-badge.status-approved {
-  background-color: #d1fae5;
-  color: #065f46;
-}
-.status-badge.status-rejected {
-  background-color: #fee2e2;
-  color: #991b1b;
-}
-
-/* --- NEW: Style for the 'completed' status badge --- */
-.status-badge.status-completed {
-  background-color: #e0e7ff;
-  color: #3730a3;
-}
+.status-badge.status-pending { background-color: var(--status-pending); color: white; }
+.status-badge.status-approved { background-color: var(--status-approved); color: white; }
+.status-badge.status-rejected { background-color: var(--status-rejected); color: white; }
+.status-badge.status-completed { background-color: var(--status-completed); color: white; }
 
 .card-body {
   padding: 1.5rem;
-  display: grid;
-  gap: 0.75rem;
+  flex-grow: 1;
 }
-
 .card-body p {
-  margin: 0;
-  color: #4b5563;
+  margin: 0 0 0.75rem 0;
+  color: var(--text-secondary);
+  font-size: 1rem;
 }
-
+.card-body p:last-child {
+  margin-bottom: 0;
+}
 .card-body p strong {
-  color: #374151;
+  color: var(--text-primary);
   margin-right: 0.5rem;
 }
-
-.card-body a {
-  color: #3b82f6;
+.proof-link {
+  color: var(--accent-primary);
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.2s;
 }
-
-.card-body a:hover {
+.proof-link:hover {
   text-decoration: underline;
+  color: var(--text-primary);
 }
 
+/* 6. CARD ACTIONS (BUTTONS) */
 .card-actions {
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
   padding: 1rem 1.5rem;
-  background-color: #f9fafb;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
 }
 
-.card-actions button {
+.action-btn {
   padding: 0.5rem 1.25rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: opacity 0.2s;
+}
+.action-btn:hover {
+  opacity: 0.85;
 }
 
-.approve-btn {
-  background-color: #10b981;
-  color: white;
-}
-.approve-btn:hover {
-  background-color: #059669;
+.approve-btn { background-color: var(--status-approved); color: white; }
+.reject-btn { background-color: var(--status-rejected); color: white; }
+.complete-btn { background-color: var(--status-completed); color: white; }
+
+/* 7. STATUS MESSAGES */
+.status-message {
+  text-align: center;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  padding: 2rem;
 }
 
-.reject-btn {
-  background-color: #ef4444;
-  color: white;
-}
-.reject-btn:hover {
-  background-color: #dc2626;
+.status-message.error {
+  color: var(--status-rejected);
 }
 
-/* --- NEW: Style for the 'Mark as Complete' button --- */
-.complete-btn {
-  background-color: #3b82f6;
-  color: white;
+/* 8. RESPONSIVE STYLES */
+@media (max-width: 768px) {
+  .fund-pending-container {
+    padding: 1.5rem 1rem;
+  }
+  .requests-list {
+    grid-template-columns: 1fr; /* Stack cards on mobile */
+  }
 }
-.complete-btn:hover {
-  background-color: #2563eb;
-}
-
-.error-message {
-    text-align: center;
-    color: #b91c1c;
-    font-weight: 500;
-}
-
