@@ -91,6 +91,20 @@ const  FundRequest= () => {
       </button>
     </div>
   );};
+  const  Community= () => {
+  const navigate = useNavigate();
+  return (
+    <div className="module-card">
+      <button 
+        className="module-btn" 
+        // When clicked, this button navigates to the '/events' page.
+        onClick={() => navigate('/community')}
+      >
+        <BookOpen size={18} />
+       Community
+      </button>
+    </div>
+  );};
   const Committee = () => {
   const navigate = useNavigate();
   return (
@@ -109,8 +123,9 @@ const  FundRequest= () => {
 
 
 
-const StudentDashboard = ({userName}) => (
+const StudentDashboard = ({userName,onLogout}) => (
   <div className="dashboard-bg">
+ <button className="logout-btn" onClick={onLogout}>Logout</button>
     <div className="dashboard-container">
       <header style={{ textAlign: "center", marginBottom: "24px" }}>
         <h2 style={{ color: "#fff", fontSize: "2rem", fontWeight: "bold", letterSpacing: "1px" }}>
@@ -126,6 +141,7 @@ const StudentDashboard = ({userName}) => (
           <FileComplaint />
           <ViewAnnouncements />
           <Committee/>
+          <Community/>
         </div>
       </main>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ViewAnnouncement.css';
-
+import backendUrl from './config';
 // Component for all users to view announcements
 const ViewAnnouncements = () => {
   const [announcements, setAnnouncements] = useState([]);
@@ -9,7 +9,7 @@ const ViewAnnouncements = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const response = await fetch('https://asca360.onrender.com/api/announcement');
+      const response = await fetch(`${backendUrl}/announcement`);
       if (!response.ok) {
         throw new Error('Failed to fetch announcements. Check server connection.');
       }

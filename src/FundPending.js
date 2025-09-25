@@ -35,7 +35,7 @@ const FundPending = () => {
   // Function to handle approving, rejecting, or completing a request
   const handleUpdateStatus = async (id, status) => {
     try {
-      const response = await fetch(`${backendUrl}/funds${id}`, {
+      const response = await fetch(`/api/funds/status/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status }),
