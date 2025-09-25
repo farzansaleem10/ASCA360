@@ -26,7 +26,7 @@ const DashBoard = ({ onLogout }) => {
     return (
         <div className="dashboard-page-container">
             <header className="dashboard-header">
-                <h2>Welcome Asca Admin</h2>
+                <h2>WELCOME ASCA ADMIN</h2>
                 <button className="logout-btn" onClick={onLogout}>Logout</button>
             </header>
             <main className="dashboard-grid">

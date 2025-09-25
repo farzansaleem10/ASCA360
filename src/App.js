@@ -6,13 +6,16 @@ import {
   Navigate,
 } from "react-router-dom";
 
+// Import main stylesheet
+import "./App.css";
+
+// Import Page Components
 import Login from "./Login";
 import AscaCommittee from "./AscaCommittee";
 import Dashboard from "./Dashboard";
 import StudentDashboard from "./StudentDashboard";
 import BalanceSheetDetails from "./BalanceSheetDetails";
 import AddEvent from "./AddEvent";
-import "./login.css";
 import ViewEvents from "./ViewEvents";
 import StudentComplaints from "./StudentComplaint";
 import ViewComplaints from "./ViewComplaints";
@@ -28,22 +31,66 @@ import Community from "./Community";
 import AlumniLogin from "./AlumniLogin";
 import AlumniDashboard from "./AlumniDashboard";
 
+// --- NEW: PWA Installation Prompt Component ---
+const InstallPwaPrompt = ({ onInstall, onDismiss }) => (
+  <div className="install-prompt-card">
+    <div className="install-prompt-content">
+      <h4>Install the ASCA App</h4>
+      <p>Add this application to your home screen for quick and easy access.</p>
+    </div>
+    <div className="install-prompt-actions">
+      <button className="install-btn--secondary" onClick={onDismiss}>Not now</button>
+      <button className="install-btn--primary" onClick={onInstall}>Install</button>
+    </div>
+  </div>
+);
+
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [userRole, setUserRole] = useState("");
+
+  // --- NEW: State for PWA installation ---
   const [installPrompt, setInstallPrompt] = useState(null);
+  const [isInstallPromptVisible, setIsInstallPromptVisible] = useState(false);
 
   useEffect(() => {
     const handler = (e) => {
       e.preventDefault();
       setInstallPrompt(e);
+      // Show the prompt only if it hasn't been dismissed before
+      if (!sessionStorage.getItem('installPromptDismissed')) {
+         setIsInstallPromptVisible(true);
+      }
     };
     window.addEventListener("beforeinstallprompt", handler);
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
     };
   }, []);
+
+  // --- NEW: Handlers for the PWA prompt ---
+  const handleInstallClick = () => {
+    if (installPrompt) {
+      installPrompt.prompt();
+      installPrompt.userChoice.then(choiceResult => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        setIsInstallPromptVisible(false);
+        setInstallPrompt(null);
+      });
+    }
+  };
+
+  const handleDismissInstall = () => {
+    setIsInstallPromptVisible(false);
+    // Use session storage to remember dismissal for this session
+    sessionStorage.setItem('installPromptDismissed', 'true');
+  };
 
   const handleLogin = (name, role) => {
     setIsLoggedIn(true);
@@ -56,7 +103,7 @@ const App = () => {
     setUserName("");
     setUserRole("");
   };
-  const renderForm = () => <Login onLogin={handleLogin} />;
+
   const renderDashboard = () => {
     switch (userRole) {
       case "alumni":
@@ -66,62 +113,46 @@ const App = () => {
         return <StudentDashboard userName={userName} onLogout={handleLogout} />;
       case "asca":
       case "committee":
-        return (
-          <Dashboard
-            userName={userName}
-            userRole={userRole}
-            onLogout={handleLogout}
-          />
-        );
+        return <Dashboard userName={userName} userRole={userRole} onLogout={handleLogout} />;
       default:
-        // If logged in but role is unknown, redirect to the main login
-        return <Navigate to="/login" />;
+        return <Navigate to="/" />; // Navigate to the main login form
     }
   };
-
+  
+  // The main render logic for the app
   return (
     <Router>
-      <div className="container">
-        <div className="right-panel">
-          <Routes>
-            <Route
-              path="/"
-              element={!isLoggedIn ? renderForm() : renderDashboard()}
-            />
-            <Route
-              path="/alumni-login"
-              element={
-                !isLoggedIn ? (
-                  <AlumniLogin onLogin={handleLogin} />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-            <Route
-              path="/alumni-dashboard"
-              element={
-                <AlumniDashboard userName={userName} onLogout={handleLogout} />
-              }
-            />
-            <Route path="/balance-sheet" element={<BalanceSheetDetails />} />
-            <Route path="/events-admin" element={<AddEvent />} />
-            <Route path="/events" element={<ViewEvents />} />
-            <Route path="/file-complaint" element={<StudentComplaints />} />
-            <Route path="/view-complaint" element={<ViewComplaints />} />
-            <Route path="/add-announcement" element={<CreateAnnouncement />} />
-            <Route path="/view-announcement" element={<ViewAnnouncements />} />
-            <Route path="/academics" element={<Academics />} />
-            <Route path="/semester-1" element={<Semester1 />} />
-            <Route path="/asca-committee" element={<AscaCommittee />} />
-            <Route path="/fundrequest" element={<FundRequest />} />
-            <Route path="/fundpending" element={<FundPending />} />
-            <Route path="/alumni-register" element={<AlumniRegister />} />
-            <Route path="/alumnirequest" element={<AlumniRequests />} />
-            <Route path="/community" element={<Community />} />
-          </Routes>
-        </div>
-      </div>
+       {/* --- NEW: Conditionally render the install prompt --- */}
+      {isInstallPromptVisible && <InstallPwaPrompt onInstall={handleInstallClick} onDismiss={handleDismissInstall} />}
+
+      <Routes>
+        {/* --- Login Routes --- */}
+        <Route path="/" element={!isLoggedIn ? <Login onLogin={handleLogin} /> : <Navigate to="/dashboard" />} />
+        <Route path="/alumni-login" element={!isLoggedIn ? <AlumniLogin onLogin={handleLogin} /> : <Navigate to="/dashboard" />} />
+        <Route path="/alumni-register" element={<AlumniRegister />} />
+
+        {/* --- Dashboard Route --- */}
+        <Route path="/dashboard" element={isLoggedIn ? renderDashboard() : <Navigate to="/" />} />
+
+        {/* --- Feature Routes --- */}
+        <Route path="/balance-sheet" element={<BalanceSheetDetails />} />
+        <Route path="/events-admin" element={<AddEvent />} />
+        <Route path="/events" element={<ViewEvents />} />
+        <Route path="/file-complaint" element={<StudentComplaints />} />
+        <Route path="/view-complaint" element={<ViewComplaints />} />
+        <Route path="/add-announcement" element={<CreateAnnouncement />} />
+        <Route path="/view-announcement" element={<ViewAnnouncements />} />
+        <Route path="/academics" element={<Academics />} />
+        <Route path="/semester-1" element={<Semester1 />} />
+        <Route path="/asca-committee" element={<AscaCommittee />} />
+        <Route path="/fundrequest" element={<FundRequest />} />
+        <Route path="/fundpending" element={<FundPending />} />
+        <Route path="/alumnirequest" element={<AlumniRequests />} />
+        <Route path="/community" element={<Community />} />
+        
+        {/* --- Redirect any unknown paths to the home route --- */}
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </Router>
   );
 };

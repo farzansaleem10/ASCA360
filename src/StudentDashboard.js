@@ -26,7 +26,7 @@ const StudentDashboard = ({ userName, onLogout }) => {
     return (
         <div className="dashboard-page-container">
             <header className="dashboard-header">
-                <h2>Welcome {userName}</h2>
+                <h2>WELCOME {userName}</h2>
                 <button className="logout-btn" onClick={onLogout}>Logout</button>
             </header>
             <main className="dashboard-grid">

@@ -1,147 +1,119 @@
-.App {
-  text-align: center;
+/* ---
+UI Theme & Style: Minimalist Fintech Dark Mode (Global Styles)
+Font: Inter (Geometric Sans-Serif)
+--- */
+
+/* 1. FONT IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* 2. GLOBAL VARIABLES */
+:root {
+  --bg-primary: #111111;
+  --bg-card: #1C1C1C;
+  --accent-primary: #C4F82A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --text-on-accent: #111111;
+  --border-color: #333333;
+  --error-color: #ef4444;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* 3. BASE & RESET STYLES */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+html, body {
+  width: 100%;
   min-height: 100vh;
+  background-color: var(--bg-primary);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 4. PWA INSTALLATION PROMPT */
+.install-prompt-card {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5000;
+  width: 90%;
+  max-width: 450px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.5s ease-out;
 }
 
-.App-link {
-  color: #61dafb;
+@keyframes slideUp {
+  from { transform: translate(-50%, 100px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.install-prompt-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.install-prompt-content p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.install-prompt-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0; /* Prevents buttons from shrinking */
+}
+
+.install-prompt-actions button {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+.install-prompt-actions button:hover {
+  opacity: 0.85;
+}
+
+.install-btn--primary {
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent);
+}
+
+.install-btn--secondary {
+  background-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+/* Responsive adjustments for the prompt */
+@media (max-width: 600px) {
+  .install-prompt-card {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-div::before {
-  content: '';
-  position: absolute;
-  pointer-events: none
-}
-/* --- PWA Install App Card --- */
-.install-app-card-container {
-    position: fixed;
-    bottom: 1.25rem;
-    right: 1.25rem;
-    z-index: 1000;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-}
-
-.install-app-card {
-    background-color: #fff;
-    border-radius: 0.75rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  .install-prompt-actions {
     width: 100%;
-    max-width: 360px;
-    overflow: hidden;
-    border: 1px solid #e5e7eb;
-}
-
-.install-app-card__header {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #f3f4f6;
-}
-
-.install-app-card__icon {
-    margin-right: 0.75rem;
-    color: #3b82f6;
-}
-
-.install-app-card__title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin: 0;
-}
-
-.install-app-card__close {
-    margin-left: auto;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #9ca3af;
-    padding: 0.25rem;
-}
-
-.install-app-card__close:hover {
-    color: #1f2937;
-}
-
-.install-app-card__body {
-    padding: 1rem;
-}
-
-.install-app-card__content {
-    font-size: 0.875rem;
-    color: #4b5563;
-    line-height: 1.5;
-    margin: 0;
-}
-
-.install-app-card__actions {
-    display: flex;
     justify-content: flex-end;
-    padding: 0.75rem 1rem;
-    background-color: #f9fafb;
-    border-top: 1px solid #f3f4f6;
-    gap: 0.5rem;
+  }
 }
-
-.install-app-card__button {
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: background-color 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.install-app-card__button--primary {
-    background-color: #3b82f6;
-    color: #fff;
-}
-
-.install-app-card__button--primary:hover {
-    background-color: #2563eb;
-}
-
-.install-app-card__button--secondary {
-    background-color: #fff;
-    color: #374151;
-    border-color: #d1d5db;
-}
-
-.install-app-card__button--secondary:hover {
-    background-color: #f3f4f6;
-}
-
