@@ -4,7 +4,6 @@ const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const cloudinary = require('cloudinary').v2;
 const bcrypt = require('bcrypt');
-const { ChevronsLeftIcon } = require('lucide-react');
 const router = express.Router();
 // Make sure to import your Alumni model
 
