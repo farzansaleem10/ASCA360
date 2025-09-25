@@ -1,59 +1,51 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BookMarked, FileText, BotMessageSquare, History, ArrowRight } from 'lucide-react';
-import PlacementCourse from './PlacementCourse'; // Import the new component
 import './Academics.css'; // Make sure this CSS file is in the same directory
 
-// Data for each academic section
+// --- UPDATE: 'path' has been changed to 'url' to hold the full GitHub links ---
 const academicSections = [
   {
     title: 'MCA Syllabus',
     description: 'View the official curriculum.',
     icon: <FileText size={48} className="card-icon" />,
-    path: 'mca-syllabus'
+    // Replace with your actual GitHub link
+    url: 'https://github.com/your-username/your-repo/tree/main/syllabus'
   },
   {
     title: 'MCA Study Materials',
     description: 'Access notes and resources.',
     icon: <BotMessageSquare size={48} className="card-icon" />,
-    path: 'mca-study-materials'
+    // Replace with your actual GitHub link
+    url: 'https://github.com/cetmca26/Study-Materials'
   },
   {
     title: 'MCA-Laboratory',
     description: 'Find lab manuals and exercises.',
     icon: <BotMessageSquare size={48} className="card-icon" />,
-    path: 'mca-laboratory'
+    // Replace with your actual GitHub link
+    url: 'https://github.com/cetmca26/MCA-Laboratory'
   },
   {
     title: 'Placement Course',
     description: 'Prepare for job interviews.',
     icon: <History size={48} className="card-icon" />,
-    path: 'placement-course' // This path will now be handled internally
+    // Replace with your actual GitHub link
+    url: 'https://github.com/your-username/your-repo/tree/main/placement-course'
   }
 ];
 
-const Academics = ({ onNavigate }) => {
-  // State to control the view: 'main' grid or 'placement-course' video page
-  const [currentView, setCurrentView] = useState('main');
+// --- UPDATE: The 'onNavigate' prop is no longer needed ---
+const Academics = () => {
 
-  const handleSectionClick = (path, sectionTitle) => {
-    // If the placement course is clicked, change the view internally
-    if (path === 'placement-course') {
-      setCurrentView('placement-course');
-    } 
-    // For other cards, use the original navigation logic
-    else if (path) {
-      onNavigate(path);
-    } else {
-      alert(`Navigating to ${sectionTitle}...`);
+  // --- UPDATE: This function now opens the URL in a new tab ---
+  const handleSectionClick = (url) => {
+    if (url) {
+      // This command opens the provided link in a new browser tab
+      window.open(url, '_blank', 'noopener,noreferrer');
     }
   };
 
-  // Conditionally render the PlacementCourse component
-  if (currentView === 'placement-course') {
-    return <PlacementCourse onBack={() => setCurrentView('main')} />;
-  }
-
-  // Render the default grid of academic cards
+  // The main component now just renders the grid
   return (
     <div className="academics-container">
       <header className="academics-header">
@@ -69,7 +61,8 @@ const Academics = ({ onNavigate }) => {
           <div 
             key={index} 
             className="academic-card"
-            onClick={() => handleSectionClick(section.path, section.title)}
+            // --- UPDATE: The click handler now passes the URL ---
+            onClick={() => handleSectionClick(section.url)}
           >
             <div className="card-content">
               {section.icon}
@@ -80,7 +73,7 @@ const Academics = ({ onNavigate }) => {
               className="card-button"
               onClick={(e) => {
                 e.stopPropagation(); 
-                handleSectionClick(section.path, section.title);
+                handleSectionClick(section.url);
               }} 
             >
               View Resources <ArrowRight size={20} className="button-icon" />
