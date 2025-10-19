@@ -1,8 +1,8 @@
 import React from 'react';
 import { ArrowLeft, CheckCircle, PlayCircle } from 'lucide-react';
-import './PlacementCourse.css'; // We will create this CSS file next
+import './PlacementCourse.css'; 
 
-// Dummy data to replicate the course content sidebar
+
 const courseVideos = [
   { id: 1, title: 'Percentage Part 5 - Advanced Shortcuts', completed: true },
   { id: 2, title: 'Percentage Part 6 - Complete All Shortcuts', completed: true, current: true },

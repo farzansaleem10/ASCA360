@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { ExternalLink, CalendarDays } from 'lucide-react';
-import './ViewEvent.css'; // Using the new stylesheet
-import backendUrl from './config';
+import React, { useState, useEffect } from "react";
+import { ExternalLink, CalendarDays } from "lucide-react";
+import "./ViewEvent.css";
+import backendUrl from "./config";
 
 const ViewEvents = () => {
-  // All existing state and logic is preserved
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,11 +28,12 @@ const ViewEvents = () => {
     fetchEvents();
   }, []);
 
-  // JSX is updated with new classNames for the fintech theme
   return (
     <div className="view-events-container">
       <header className="events-header">
-        <h1><CalendarDays size={32} /> Association Events</h1>
+        <h1>
+          <CalendarDays size={32} /> Association Events
+        </h1>
         <p>Browse through all the events organized by the association.</p>
       </header>
 
@@ -46,14 +46,14 @@ const ViewEvents = () => {
           <p className="status-message">No events have been scheduled yet.</p>
         ) : (
           <div className="events-list">
-            {events.map(event => (
+            {events.map((event) => (
               <div key={event._id} className="event-card">
                 <div className="event-card-header">
-                    <h3>{event.eventName}</h3>
-                    <p className="event-date">
-                        <CalendarDays size={16} />
-                        {new Date(event.date).toLocaleDateString()}
-                    </p>
+                  <h3>{event.eventName}</h3>
+                  <p className="event-date">
+                    <CalendarDays size={16} />
+                    {new Date(event.date).toLocaleDateString()}
+                  </p>
                 </div>
                 <p className="event-description">{event.description}</p>
                 <a

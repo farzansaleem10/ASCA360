@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import './ViewComplaint.css'; // Using the new stylesheet
-import backendUrl from './config';
+import React, { useState, useEffect } from "react";
+import "./ViewComplaint.css";
+import backendUrl from "./config";
 
 const ViewComplaints = () => {
-  // All existing state and logic is preserved
   const [complaints, setComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchComplaints = async () => {
     try {
-      const response = await fetch(`${backendUrl}/complaints`); // Using backendUrl
+      const response = await fetch(`${backendUrl}/complaints`);
       if (!response.ok) {
-        throw new Error('Failed to fetch complaints. Check server connection.');
+        throw new Error("Failed to fetch complaints. Check server connection.");
       }
       const data = await response.json();
       setComplaints(data);
@@ -25,20 +24,20 @@ const ViewComplaints = () => {
 
   const handleMarkAsComplete = async (id) => {
     try {
-      const response = await fetch(`${backendUrl}/complaints/${id}`, { // Using backendUrl
-        method: 'PUT',
+      const response = await fetch(`${backendUrl}/complaints/${id}`, {
+        method: "PUT",
       });
       if (!response.ok) {
-        throw new Error('Failed to mark complaint as complete.');
+        throw new Error("Failed to mark complaint as complete.");
       }
-      setComplaints(prevComplaints =>
-        prevComplaints.map(c =>
-          c._id === id ? { ...c, status: 'completed' } : c
+      setComplaints((prevComplaints) =>
+        prevComplaints.map((c) =>
+          c._id === id ? { ...c, status: "completed" } : c
         )
       );
     } catch (e) {
-      console.error('Error marking complaint as complete:', e);
-      setError('Failed to update complaint status.');
+      console.error("Error marking complaint as complete:", e);
+      setError("Failed to update complaint status.");
     }
   };
 
@@ -46,7 +45,6 @@ const ViewComplaints = () => {
     fetchComplaints();
   }, []);
 
-  // JSX is updated with new classNames for the fintech theme
   return (
     <div className="view-complaints-container">
       <header className="complaints-header">
@@ -78,12 +76,14 @@ const ViewComplaints = () => {
                     <td>{complaint.author}</td>
                     <td className="complaint-text-cell">{complaint.text}</td>
                     <td>
-                      <span className={`status-badge status-${complaint.status}`}>
+                      <span
+                        className={`status-badge status-${complaint.status}`}
+                      >
                         {complaint.status}
                       </span>
                     </td>
                     <td>
-                      {complaint.status !== 'completed' && (
+                      {complaint.status !== "completed" && (
                         <button
                           onClick={() => handleMarkAsComplete(complaint._id)}
                           className="action-btn"

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import './FundPending.css'; // Using the new stylesheet
-import backendUrl from './config';
+import React, { useState, useEffect } from "react";
+import "./FundPending.css";
+import backendUrl from "./config";
 
 const FundPending = () => {
-  // All existing state and logic is preserved
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const fetchRequests = async () => {
     try {
@@ -16,7 +15,7 @@ const FundPending = () => {
       if (response.ok) {
         setRequests(data);
       } else {
-        throw new Error(data.message || 'Failed to fetch requests.');
+        throw new Error(data.message || "Failed to fetch requests.");
       }
     } catch (err) {
       setError(err.message);
@@ -31,15 +30,15 @@ const FundPending = () => {
 
   const handleUpdateStatus = async (id, status) => {
     try {
-      const response = await fetch(`${backendUrl}/funds/status/${id}`, { // Using backendUrl for consistency
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch(`${backendUrl}/funds/status/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
       });
       const result = await response.json();
       if (response.ok && result.success) {
-        setRequests(prevRequests =>
-          prevRequests.map(req =>
+        setRequests((prevRequests) =>
+          prevRequests.map((req) =>
             req._id === id ? { ...req, status: status } : req
           )
         );
@@ -51,7 +50,6 @@ const FundPending = () => {
     }
   };
 
-  // JSX is updated with new classNames for the fintech theme
   return (
     <div className="fund-pending-container">
       <header className="fund-pending-header">
@@ -69,36 +67,63 @@ const FundPending = () => {
         ) : (
           <div className="requests-list">
             {requests.map((req) => (
-              <div key={req._id} className={`request-card status-${req.status}`}>
+              <div
+                key={req._id}
+                className={`request-card status-${req.status}`}
+              >
                 <div className="card-header">
                   <h3>{req.eventName}</h3>
-                  <span className={`status-badge status-${req.status}`}>{req.status}</span>
+                  <span className={`status-badge status-${req.status}`}>
+                    {req.status}
+                  </span>
                 </div>
                 <div className="card-body">
-                  <p><strong>Student:</strong> {req.submittedBy}</p>
-                  <p><strong>Amount:</strong> ₹{req.amount.toLocaleString()}</p>
-                  <p><strong>UPI ID:</strong> {req.upiId}</p>
-                  <p><strong>Purpose:</strong> {req.purpose}</p>
-                   <p>
-                    <strong>Proof:</strong>{' '}
-                    <a href={req.proofLink} target="_blank" rel="noopener noreferrer" className="proof-link">
+                  <p>
+                    <strong>Student:</strong> {req.submittedBy}
+                  </p>
+                  <p>
+                    <strong>Amount:</strong> ₹{req.amount.toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>UPI ID:</strong> {req.upiId}
+                  </p>
+                  <p>
+                    <strong>Purpose:</strong> {req.purpose}
+                  </p>
+                  <p>
+                    <strong>Proof:</strong>{" "}
+                    <a
+                      href={req.proofLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="proof-link"
+                    >
                       View Receipt
                     </a>
                   </p>
                 </div>
                 <div className="card-actions">
-                  {req.status === 'pending' && (
+                  {req.status === "pending" && (
                     <>
-                      <button className="action-btn reject-btn" onClick={() => handleUpdateStatus(req._id, 'rejected')}>
+                      <button
+                        className="action-btn reject-btn"
+                        onClick={() => handleUpdateStatus(req._id, "rejected")}
+                      >
                         Reject
                       </button>
-                      <button className="action-btn approve-btn" onClick={() => handleUpdateStatus(req._id, 'approved')}>
+                      <button
+                        className="action-btn approve-btn"
+                        onClick={() => handleUpdateStatus(req._id, "approved")}
+                      >
                         Approve
                       </button>
                     </>
                   )}
-                  {req.status === 'approved' && (
-                    <button className="action-btn complete-btn" onClick={() => handleUpdateStatus(req._id, 'completed')}>
+                  {req.status === "approved" && (
+                    <button
+                      className="action-btn complete-btn"
+                      onClick={() => handleUpdateStatus(req._id, "completed")}
+                    >
                       Mark as Complete
                     </button>
                   )}

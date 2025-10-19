@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import './ViewAnnouncement.css'; // Using the new stylesheet
-import backendUrl from './config';
+import React, { useState, useEffect } from "react";
+import "./ViewAnnouncement.css";
+import backendUrl from "./config";
 
 const ViewAnnouncements = () => {
-  // All existing state and logic is preserved
   const [announcements, setAnnouncements] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +11,9 @@ const ViewAnnouncements = () => {
     try {
       const response = await fetch(`${backendUrl}/announcement`);
       if (!response.ok) {
-        throw new Error('Failed to fetch announcements. Check server connection.');
+        throw new Error(
+          "Failed to fetch announcements. Check server connection."
+        );
       }
       const data = await response.json();
       setAnnouncements(data);
@@ -27,7 +28,6 @@ const ViewAnnouncements = () => {
     fetchAnnouncements();
   }, []);
 
-  // JSX is updated with new classNames for the fintech theme
   return (
     <div className="announcements-container">
       <header className="announcements-header">
@@ -53,7 +53,8 @@ const ViewAnnouncements = () => {
                   {announcement.content}
                 </p>
                 <div className="announcement-item-meta">
-                  - Posted by {announcement.createdBy} on {new Date(announcement.createdAt).toLocaleDateString()}
+                  - Posted by {announcement.createdBy} on{" "}
+                  {new Date(announcement.createdAt).toLocaleDateString()}
                 </div>
               </div>
             ))}

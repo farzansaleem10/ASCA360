@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import './FundRequest.css'; // Using the new stylesheet
-import backendUrl from './config';
+import React, { useState } from "react";
+import "./FundRequest.css";
+import backendUrl from "./config";
 
 const FundRequest = () => {
-  // All existing state and form logic is preserved
   const [formData, setFormData] = useState({
-    studentName: '',
-    eventName: '',
-    purpose: '',
-    amount: '',
-    upiId: '',
-    proofLink: '',
+    studentName: "",
+    eventName: "",
+    purpose: "",
+    amount: "",
+    upiId: "",
+    proofLink: "",
   });
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
@@ -26,7 +25,7 @@ const FundRequest = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setMessage('');
+    setMessage("");
 
     try {
       const submissionData = {
@@ -39,35 +38,34 @@ const FundRequest = () => {
       };
 
       const response = await fetch(`${backendUrl}/funds`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(submissionData),
       });
 
       const result = await response.json();
 
       if (response.ok && result.success) {
-        setMessage('Fund request submitted successfully!');
+        setMessage("Fund request submitted successfully!");
         setFormData({
-          studentName: '',
-          eventName: '',
-          purpose: '',
-          amount: '',
-          upiId: '',
-          proofLink: '',
+          studentName: "",
+          eventName: "",
+          purpose: "",
+          amount: "",
+          upiId: "",
+          proofLink: "",
         });
       } else {
-        setMessage(result.message || 'An error occurred. Please try again.');
+        setMessage(result.message || "An error occurred. Please try again.");
       }
     } catch (error) {
-      console.error('Submission Error:', error);
-      setMessage('A network error occurred. Please check your connection.');
+      console.error("Submission Error:", error);
+      setMessage("A network error occurred. Please check your connection.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // JSX is updated with new classNames for the fintech theme
   return (
     <div className="fund-request-container">
       <div className="form-wrapper">
@@ -132,7 +130,7 @@ const FundRequest = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="proofLink">Proof Link (e.g., Google Drive)</label>
+            <label htmlFor="proofLink">Reciept</label>
             <input
               type="url"
               id="proofLink"
@@ -143,7 +141,7 @@ const FundRequest = () => {
             />
           </div>
           <button type="submit" className="submit-btn" disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Submit Request'}
+            {isSubmitting ? "Submitting..." : "Submit Request"}
           </button>
         </form>
         {message && <p className="form-message">{message}</p>}

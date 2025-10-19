@@ -22,13 +22,7 @@ const fundRequestSchema = new mongoose.Schema({
 
 const FundRequest = mongoose.model('FundRequest', fundRequestSchema);
 
-// === API Routes ===
 
-/**
- * @route   POST /api/funds
- * @desc    Create a new fund request
- * @access  Students
- */
 router.post('/', async (req, res) => {
   console.log('Received fund request data:', req.body);
   try {
@@ -55,11 +49,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-/**
- * @route   GET /api/funds
- * @desc    Get all fund requests
- * @access  Committee only
- */
+
 router.get('/', async (req, res) => {
   try {
     const requests = await FundRequest.find().sort({ createdAt: -1 });
@@ -69,12 +59,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-/**
- * --- NEW: THIS ROUTE WAS MISSING ---
- * @route   PUT /api/funds/:id
- * @desc    Update the status of a fund request
- * @access  Committee only
- */
+
 router.put('/:id', async (req, res) => {
   try {
     const { status } = req.body;
@@ -102,6 +87,5 @@ router.put('/:id', async (req, res) => {
 });
 
 
-// Export the router so server.js can use it
 module.exports = router;
 

@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
-import './comit.css'; // Using the new stylesheet
+import React, { useState } from "react";
+import "./comit.css";
 
-// This object mapping years to images remains the same
 const committeeImages = {
-  '2025': 'committe.jpg',
-  '2024': 'commit24-25.png',
-  '2023': 'commit23-24.png',
-  '2022': 'commit22-23.png',
-  '2021': 'commit21-22.png',
+  2025: "committe.jpg",
+  2024: "commit24-25.png",
+  2023: "commit23-24.png",
+  2022: "commit22-23.png",
+  2021: "commit21-22.png",
 };
 
 const AscaCommittee = () => {
-  // All state and handler logic is preserved
-  const [selectedYear, setSelectedYear] = useState('2025');
+  const [selectedYear, setSelectedYear] = useState("2025");
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
   };
 
-  // The JSX is updated with new classNames for the fintech theme
   return (
     <div className="committee-container">
       <header className="committee-header">
@@ -44,11 +41,11 @@ const AscaCommittee = () => {
         </div>
 
         <div className="image-wrapper">
-            <img
-                src={committeeImages[selectedYear]}
-                alt={`ASCA Committee ${selectedYear}`}
-                className="committee-image"
-            />
+          <img
+            src={committeeImages[selectedYear]}
+            alt={`ASCA Committee ${selectedYear}`}
+            className="committee-image"
+          />
         </div>
       </div>
     </div>

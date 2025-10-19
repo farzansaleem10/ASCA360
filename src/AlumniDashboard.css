@@ -148,9 +148,9 @@ Font: Inter (Geometric Sans-Serif)
 
 /* 6. ANNOUNCEMENTS SECTION */
 .announcements-content-card {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
+ display: grid;
+ grid-template-columns: 1fr; /* <-- This stacks them vertically */
+ gap: 2rem;
 }
 
 .announcement-form-container, .announcements-list-container {
@@ -169,6 +169,7 @@ Font: Inter (Geometric Sans-Serif)
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  
 }
 
 .announcement-form input, .announcement-form textarea {
@@ -239,7 +240,9 @@ Font: Inter (Geometric Sans-Serif)
 /* 7. RESPONSIVENESS */
 @media (max-width: 900px) {
   .announcements-content-card {
-    grid-template-columns: 1fr;
+display: grid;
+ grid-template-columns: 1fr ;
+ gap: 2rem;
   }
 }
 

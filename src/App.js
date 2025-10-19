@@ -6,10 +6,8 @@ import {
   Navigate,
 } from "react-router-dom";
 
-// Import main stylesheet
 import "./App.css";
 
-// Import Page Components
 import Login from "./Login";
 import AscaCommittee from "./AscaCommittee";
 import Dashboard from "./Dashboard";
@@ -31,7 +29,6 @@ import Community from "./Community";
 import AlumniLogin from "./AlumniLogin";
 import AlumniDashboard from "./AlumniDashboard";
 
-// --- NEW: PWA Installation Prompt Component ---
 const InstallPwaPrompt = ({ onInstall, onDismiss }) => (
   <div className="install-prompt-card">
     <div className="install-prompt-content">
@@ -39,12 +36,15 @@ const InstallPwaPrompt = ({ onInstall, onDismiss }) => (
       <p>Add this application to your home screen for quick and easy access.</p>
     </div>
     <div className="install-prompt-actions">
-      <button className="install-btn--secondary" onClick={onDismiss}>Not now</button>
-      <button className="install-btn--primary" onClick={onInstall}>Install</button>
+      <button className="install-btn--secondary" onClick={onDismiss}>
+        Not now
+      </button>
+      <button className="install-btn--primary" onClick={onInstall}>
+        Install
+      </button>
     </div>
   </div>
 );
-
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -59,9 +59,9 @@ const App = () => {
     const handler = (e) => {
       e.preventDefault();
       setInstallPrompt(e);
-      // Show the prompt only if it hasn't been dismissed before
-      if (!sessionStorage.getItem('installPromptDismissed')) {
-         setIsInstallPromptVisible(true);
+
+      if (!sessionStorage.getItem("installPromptDismissed")) {
+        setIsInstallPromptVisible(true);
       }
     };
     window.addEventListener("beforeinstallprompt", handler);
@@ -70,15 +70,14 @@ const App = () => {
     };
   }, []);
 
-  // --- NEW: Handlers for the PWA prompt ---
   const handleInstallClick = () => {
     if (installPrompt) {
       installPrompt.prompt();
-      installPrompt.userChoice.then(choiceResult => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the A2HS prompt');
+      installPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("User accepted the A2HS prompt");
         } else {
-          console.log('User dismissed the A2HS prompt');
+          console.log("User dismissed the A2HS prompt");
         }
         setIsInstallPromptVisible(false);
         setInstallPrompt(null);
@@ -88,8 +87,8 @@ const App = () => {
 
   const handleDismissInstall = () => {
     setIsInstallPromptVisible(false);
-    // Use session storage to remember dismissal for this session
-    sessionStorage.setItem('installPromptDismissed', 'true');
+
+    sessionStorage.setItem("installPromptDismissed", "true");
   };
 
   const handleLogin = (name, role) => {
@@ -113,28 +112,55 @@ const App = () => {
         return <StudentDashboard userName={userName} onLogout={handleLogout} />;
       case "asca":
       case "committee":
-        return <Dashboard userName={userName} userRole={userRole} onLogout={handleLogout} />;
+        return (
+          <Dashboard
+            userName={userName}
+            userRole={userRole}
+            onLogout={handleLogout}
+          />
+        );
       default:
         return <Navigate to="/" />; // Navigate to the main login form
     }
   };
-  
-  // The main render logic for the app
+
   return (
     <Router>
-       {/* --- NEW: Conditionally render the install prompt --- */}
-      {isInstallPromptVisible && <InstallPwaPrompt onInstall={handleInstallClick} onDismiss={handleDismissInstall} />}
+      {isInstallPromptVisible && (
+        <InstallPwaPrompt
+          onInstall={handleInstallClick}
+          onDismiss={handleDismissInstall}
+        />
+      )}
 
       <Routes>
-        {/* --- Login Routes --- */}
-        <Route path="/" element={!isLoggedIn ? <Login onLogin={handleLogin} /> : <Navigate to="/dashboard" />} />
-        <Route path="/alumni-login" element={!isLoggedIn ? <AlumniLogin onLogin={handleLogin} /> : <Navigate to="/dashboard" />} />
+        <Route
+          path="/"
+          element={
+            !isLoggedIn ? (
+              <Login onLogin={handleLogin} />
+            ) : (
+              <Navigate to="/dashboard" />
+            )
+          }
+        />
+        <Route
+          path="/alumni-login"
+          element={
+            !isLoggedIn ? (
+              <AlumniLogin onLogin={handleLogin} />
+            ) : (
+              <Navigate to="/dashboard" />
+            )
+          }
+        />
         <Route path="/alumni-register" element={<AlumniRegister />} />
 
-        {/* --- Dashboard Route --- */}
-        <Route path="/dashboard" element={isLoggedIn ? renderDashboard() : <Navigate to="/" />} />
+        <Route
+          path="/dashboard"
+          element={isLoggedIn ? renderDashboard() : <Navigate to="/" />}
+        />
 
-        {/* --- Feature Routes --- */}
         <Route path="/balance-sheet" element={<BalanceSheetDetails />} />
         <Route path="/events-admin" element={<AddEvent />} />
         <Route path="/events" element={<ViewEvents />} />
@@ -149,8 +175,7 @@ const App = () => {
         <Route path="/fundpending" element={<FundPending />} />
         <Route path="/alumnirequest" element={<AlumniRequests />} />
         <Route path="/community" element={<Community />} />
-        
-        {/* --- Redirect any unknown paths to the home route --- */}
+
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

@@ -5,10 +5,6 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const cloudinary = require('cloudinary').v2;
 const bcrypt = require('bcrypt');
 const router = express.Router();
-// Make sure to import your Alumni model
-
-
-// Configure Cloudinary (ensure credentials are in your .env file)
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -26,9 +22,6 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage: storage });
 
-// === Alumni Schema with Status Field ===
-// NOTE: I'm re-adding the schemas for currentWorkplace and experiences
-// Ensure these are defined if you separated them previously.
 const currentWorkplaceSchema = new mongoose.Schema({
     institution: String,
     designation: String
@@ -60,10 +53,6 @@ const alumniSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 const Alumni = mongoose.model('Alumni', alumniSchema);
-
-// === API Routes ===
-
-// POST /register - saves new alumni with a 'pending' status
 router.post('/register', upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'pgCertificate', maxCount: 1 }]), async (req, res) => {
     try {
         if (!req.files || !req.files.photo || !req.files.pgCertificate) {
@@ -101,7 +90,6 @@ router.post('/register', upload.fields([{ name: 'photo', maxCount: 1 }, { name: 
 });
 
 
-// GET /pending - Get all alumni registrations with 'pending' status
 router.get('/pending', async (req, res) => {
   try {
     const pendingAlumni = await Alumni.find({ status: 'pending' }).select('-password').sort({ createdAt: -1 });
@@ -123,14 +111,10 @@ router.get('/profile/:email', async (req, res) => {
     }
 });
 
-/**
- * @route   GET /api/alumni/approved
- * @desc    Get all approved alumni for the community page
- * @access  Public (for any logged-in user)
- */
+
 router.get('/approved', async (req, res) => {
   try {
-    // --- UPDATED: Changed the .select() to include more fields for the detailed view ---
+
     const approvedAlumni = await Alumni.find({ status: 'approved' })
       .select('firstName lastName photoUrl graduationYear linkedin github email currentWorkplace experiences')
       .sort({ graduationYear: -1, firstName: 1 });
@@ -141,7 +125,6 @@ router.get('/approved', async (req, res) => {
 });
 
 
-// PUT /status/:id - Update an alumnus's registration status
 router.put('/status/:id', async (req, res) => {
   try {
     const { status } = req.body;
@@ -191,26 +174,14 @@ router.post("/login", async (req, res) => {
 });
 
 
-/**
- * --- NEW: THIS ROUTE WAS MISSING ---
- * @route   PUT /api/announcements/:id
- * @desc    Update an existing announcement
- * @access  Admin/Alumni
- */
 
-/**
- * --- ADDED: This route was missing ---
- * @route   PUT /api/announcements/:id
- * @desc    Update an existing announcement
- * @access  Admin/Alumni
- */
 router.put('/:id', async (req, res) => {
     try {
         const { title, content, createdBy } = req.body;
         const updatedAnnouncement = await Announcement.findByIdAndUpdate(
             req.params.id,
             { title, content, createdBy },
-            { new: true } // This option returns the updated document
+            { new: true } 
         );
 
         if (!updatedAnnouncement) {
@@ -224,12 +195,6 @@ router.put('/:id', async (req, res) => {
 });
 
 
-/**
- * --- ADDED: This route was missing ---
- * @route   DELETE /api/announcements/:id
- * @desc    Delete an announcement
- * @access  Admin/Alumni
- */
 router.delete('/:id', async (req, res) => {
   console.log(deletedAnnouncement);
     try {
@@ -250,9 +215,9 @@ router.put('/:id', async (req, res) => {
     try {
         const updatedAlumni = await Alumni.findByIdAndUpdate(
             req.params.id,
-            req.body, // Allows updating any field from the body
+            req.body, 
             { new: true }
-        ).select('-password'); // Exclude password from the response
+        ).select('-password');
 
         if (!updatedAlumni) {
             return res.status(404).json({ success: false, message: 'Alumni not found.' });
@@ -265,12 +230,7 @@ router.put('/:id', async (req, res) => {
 });
 
 
-/**
- * --- NEW ROUTE ---
- * @route   DELETE /api/alumni/:id
- * @desc    Delete an alumnus's profile
- * @access  Admin/Committee only
- */
+
 router.delete('/:id', async (req, res) => {
     try {
         const deletedAlumni = await Alumni.findByIdAndDelete(req.params.id);

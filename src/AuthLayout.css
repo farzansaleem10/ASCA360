@@ -1,0 +1,45 @@
+/* ---
+UI Theme & Style: Minimalist Fintech Dark Mode (Auth Layout)
+Description: Provides a consistent container and header for all login/register pages.
+--- */
+
+/* 1. BASE LAYOUT */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  background-color: var(--bg-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.auth-wrapper {
+  width: 100%;
+  max-width: 500px; /* A consistent width for auth forms */
+}
+
+/* 2. HEADER STYLING */
+.auth-header {
+  text-align: center;
+
+}
+
+.auth-header h1 {
+  color: var(--text-primary);
+  font-size: 2.75rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+}
+
+.auth-header p {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+/* 3. MAIN CONTENT AREA */
+.auth-content {
+  width: 100%;
+}
+

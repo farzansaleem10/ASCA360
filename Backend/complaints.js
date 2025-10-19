@@ -3,11 +3,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-// Create an Express router to define the API routes
 const router = express.Router();
 
-// === Complaint Schema and Model ===
-// This schema defines the structure for a complaint document in MongoDB.
 const complaintSchema = new mongoose.Schema({
   author: { 
     type: String, 
@@ -28,16 +25,8 @@ const complaintSchema = new mongoose.Schema({
   }
 });
 
-// Create the Mongoose model from the schema
 const Complaint = mongoose.model('Complaint', complaintSchema);
 
-// === API Routes ===
-
-/**
- * @route   POST /api/complaints
- * @desc    Create a new complaint
- * @access  Student
- */
 router.post('/', async (req, res) => {
   try {
     const { author, text } = req.body;
@@ -54,14 +43,10 @@ router.post('/', async (req, res) => {
   }
 });
 
-/**
- * @route   GET /api/complaints
- * @desc    Get all complaints
- * @access  Admin
- */
+
 router.get('/', async (req, res) => {
   try {
-    // Fetch all complaints from the database, sorted by creation date
+  
     const complaints = await Complaint.find().sort({ createdAt: -1 });
     res.json(complaints);
   } catch (error) {
@@ -69,17 +54,12 @@ router.get('/', async (req, res) => {
   }
 });
 
-/**
- * @route   PUT /api/complaints/:id
- * @desc    Mark a complaint as completed
- * @access  Admin
- */
 router.put('/:id', async (req, res) => {
   try {
     const complaint = await Complaint.findByIdAndUpdate(
       req.params.id,
       { $set: { status: 'completed' } },
-      { new: true } // Return the updated document
+      { new: true }
     );
 
     if (!complaint) {
@@ -92,5 +72,4 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Export the router to be used in server.js
 module.exports = router;
