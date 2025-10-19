@@ -28,6 +28,11 @@ import AlumniRequests from "./AlumniRequest";
 import Community from "./Community";
 import AlumniLogin from "./AlumniLogin";
 import AlumniDashboard from "./AlumniDashboard";
+import WorkExperienceReview from "./WorkExperienceReview";
+import StudentPlacement from "./StudentPlacement";
+import ExploreCompanies from "./ExploreCompanies";
+import PlacementReviewForm from "./PlacementReviewForm";
+import PlacementRequest from "./PlacementRequest";
 
 const InstallPwaPrompt = ({ onInstall, onDismiss }) => (
   <div className="install-prompt-card">
@@ -175,7 +180,11 @@ const App = () => {
         <Route path="/fundpending" element={<FundPending />} />
         <Route path="/alumnirequest" element={<AlumniRequests />} />
         <Route path="/community" element={<Community />} />
-
+        <Route path="/work-experience" element={<WorkExperienceReview />} />
+        <Route path="student-placement" element={<StudentPlacement />} />
+          <Route path="explore" element={<ExploreCompanies />} />
+          <Route path="review" element={<PlacementReviewForm />} />
+          <Route path="request" element={<PlacementRequest />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

@@ -67,7 +67,7 @@ const DashBoard = ({ onLogout }) => {
           Add Announcement
         </ModuleButton>
         <ModuleButton
-          onClick={() => navigate("/fundpending")}
+          onClick={() => navigate("/request")}
           icon={<HandCoins size={20} />}
         >
           Placement

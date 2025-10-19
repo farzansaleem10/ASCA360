@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./AlumniDashboard.css";
+import WorkExperienceReview from "./WorkExperienceReview";
 import backendUrl from "./config";
 import { User, Megaphone, Users } from "lucide-react";
 
@@ -376,10 +377,12 @@ const AlumniDashboard = ({ userName, onLogout }) => {
           <Users size={18} /> Community
         </button>
          <button
-          onClick={() => setActiveSection("community")}
-          className={`tab ${activeSection === "community" ? "active" : ""}`}
-        >
-          <Users size={18} /> Work Experience Review
+         onClick={() => setActiveSection("work-experience")}
+          className={`tab ${
+            activeSection === "work-experience" ? "active" : ""
+          }`}
+        >
+          <Users size={18} /> Work Experience Review
         </button>
       </div>
 
@@ -392,6 +395,9 @@ const AlumniDashboard = ({ userName, onLogout }) => {
         )}
 
         {activeSection === "community" && <CommunityBrowser />}
+        {activeSection === "work-experience" && (
+          <WorkExperienceReview alumniData={alumniData} />
+        )}
       </main>
     </div>
   );

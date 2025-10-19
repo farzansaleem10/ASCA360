@@ -81,7 +81,7 @@ const StudentDashboard = ({ userName, onLogout }) => {
           Community
         </ModuleButton>
           <ModuleButton
-          onClick={() => navigate("/academics")}
+          onClick={() => navigate("/student-placement")}
           icon={<GraduationCap size={20} />}
         >
           Placement

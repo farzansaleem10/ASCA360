@@ -12,6 +12,9 @@ const complaintsRoutes = require("./complaints");
 const announcementRoutes = require("./announcement");
 const fundRoutes = require("./funds");
 const alumniRoutes = require("./alumni");
+const workReviewRoutes = require("./workReviews");
+const placementReviewRoutes = require("./placementReview");
+const reviewRoutes = require("./reviews");
 const app = express();
 
 // Middleware
@@ -156,13 +159,10 @@ app.use("/api/complaints", complaintsRoutes);
 app.use("/api/announcement", announcementRoutes);
 app.use("/api/funds", fundRoutes);
 app.use("/api/alumni", alumniRoutes);
-// app.use(
-//   cors({
-//     origin: "*",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
+app.use("/api/work-reviews", workReviewRoutes);
+app.use("/api/placement-reviews", placementReviewRoutes);
+app.use("/api/reviews", reviewRoutes);
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
