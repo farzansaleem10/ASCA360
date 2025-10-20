@@ -1,71 +1,74 @@
-/* ---
-UI Theme & Style: Minimalist Fintech Dark Mode (Fund Pending Page)
-Font: Inter (Geometric Sans-Serif)
---- */
-
-/* 1. VARIABLES (Consistent with other pages) */
+/* --- Dark Theme Variables --- */
 :root {
-  --bg-primary: #111111;
-  --bg-card: #1C1C1C;
-  --accent-primary: #C4F82A;
-  --text-primary: #FFFFFF;
-  --text-secondary: #A1A1AA;
-  --text-on-accent: #111111;
-  --border-color: #333333;
-  --status-approved: #22c55e; /* Green */
-  --status-rejected: #e67171;  /* Red */
-  --status-pending: #f59e0b;   /* Amber */
-  --status-completed: #6366f1; /* Indigo */
+--bg-dark: #121217;
+--bg-card: #1C1C22;
+--border-color: #3a3a50;
+--text-primary: #f0f0f0;
+--text-secondary: #a1a1aa;
+
+  /* Status Colors */
+--status-pending: #facc15;    /* Yellow */
+--status-approved: #4ade80;  /* Green */
+--status-rejected: #f87171;   /* Red */
+--status-completed: #60a5fa; /* Blue */
 }
 
-/* 2. BASE LAYOUT */
+/* --- Main Container & Header --- */
 .fund-pending-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
-  font-family: 'Inter', sans-serif;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
-  min-height: 100vh;
+ width: 100%;
+ max-width: 900px;
+ margin: 2rem auto;
+ padding: 2rem;
+ font-family: 'Inter', sans-serif;
+ color: var(--text-primary);
 }
 
-/* 3. HEADER */
 .fund-pending-header {
-  text-align: center;
-  margin-bottom: 3rem;
+text-align: center;
+margin-bottom: 2.5rem;
 }
 
 .fund-pending-header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
+font-size: 2.25rem;
+font-weight: 700;
+margin-bottom: 0.5rem;
 }
 
 .fund-pending-header p {
-  font-size: 1.125rem;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
+color: var(--text-secondary);
+font-size: 1.1rem;
 }
 
-/* 4. REQUESTS LIST & CARDS */
+/* --- Content & Messages --- */
+.fund-pending-content {
+  width: 100%;
+}
+.status-message {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  padding: 2rem;
+}
+.status-message.error {
+  color: var(--status-rejected);
+}
+
+/* --- Request List & Cards --- */
 .requests-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
 }
 
 .request-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border-radius: 8px;
+  overflow: hidden; /* Ensures child elements don't break the border radius */
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Ensures child elements respect border-radius */
 }
 
-/* 5. CARD CONTENT STYLING */
+/* --- Card Header --- */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -75,95 +78,160 @@ Font: Inter (Geometric Sans-Serif)
 }
 
 .card-header h3 {
-  margin: 0;
   font-size: 1.25rem;
+  margin: 0;
   font-weight: 600;
 }
 
+/* --- Status Badge --- */
 .status-badge {
   padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
   font-weight: 600;
   text-transform: capitalize;
+  color: #111;
 }
-.status-badge.status-pending { background-color: var(--status-pending); color: white; }
-.status-badge.status-approved { background-color: var(--status-approved); color: white; }
-.status-badge.status-rejected { background-color: var(--status-rejected); color: white; }
-.status-badge.status-completed { background-color: var(--status-completed); color: white; }
 
+.status-badge.status-pending { background-color: var(--status-pending); }
+.status-badge.status-approved { background-color: var(--status-approved); }
+.status-badge.status-rejected { background-color: var(--status-rejected); }
+.status-badge.status-completed { background-color: var(--status-completed); }
+
+/* --- Card Body --- */
 .card-body {
   padding: 1.5rem;
-  flex-grow: 1;
+  display: grid;
+  gap: 0.75rem;
 }
 .card-body p {
-  margin: 0 0 0.75rem 0;
+  margin: 0;
   color: var(--text-secondary);
-  font-size: 1rem;
-}
-.card-body p:last-child {
-  margin-bottom: 0;
+  line-height: 1.6;
 }
 .card-body p strong {
   color: var(--text-primary);
-  margin-right: 0.5rem;
+  font-weight: 500;
 }
+
 .proof-link {
-  color: var(--accent-primary);
+  color: var(--status-completed);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s;
 }
 .proof-link:hover {
   text-decoration: underline;
+}
+
+.rejection-reason {
+  background-color: rgba(248, 113, 113, 0.1);
+  border-left: 3px solid var(--status-rejected);
+  padding: 0.75rem;
+  border-radius: 4px;
+  color: #fecaca;
+}
+.rejection-reason strong {
   color: var(--text-primary);
 }
 
-/* 6. CARD ACTIONS (BUTTONS) */
+/* --- Card Actions (Buttons) --- */
 .card-actions {
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
   padding: 1rem 1.5rem;
   border-top: 1px solid var(--border-color);
-  background-color: var(--bg-primary);
+  background-color: #16161a;
 }
 
 .action-btn {
-  padding: 0.5rem 1.25rem;
   border: none;
-  border-radius: 8px;
-  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
   font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s ease;
 }
 .action-btn:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
-.approve-btn { background-color: var(--status-approved); color: white; }
-.reject-btn { background-color: var(--status-rejected); color: white; }
-.complete-btn { background-color: var(--status-completed); color: white; }
+.approve-btn {
+  background-color: var(--status-approved);
+  color: #111;
+}
+.reject-btn {
+  background-color: var(--status-rejected);
+  color: var(--text-primary);
+}
+.complete-btn {
+  background-color: var(--status-completed);
+  color: #111;
+}
 
-/* 7. STATUS MESSAGES */
-.status-message {
-  text-align: center;
-  font-size: 1.125rem;
-  color: var(--text-secondary);
+/* --- Rejection Modal --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
   padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modal-content h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+.modal-content p {
+  color: var(--text-secondary);
+  margin: 0;
 }
 
-.status-message.error {
-  color: var(--status-rejected);
+.reason-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: #2a2a2a;
+  color: var(--text-primary);
+  font-size: 1rem;
+  resize: vertical;
+}
+.reason-textarea:focus {
+  outline: none;
+  border-color: var(--status-completed);
 }
 
-/* 8. RESPONSIVE STYLES */
-@media (max-width: 768px) {
-  .fund-pending-container {
-    padding: 1.5rem 1rem;
-  }
-  .requests-list {
-    grid-template-columns: 1fr; /* Stack cards on mobile */
-  }
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.modal-actions .action-btn {
+  background-color: #333;
+  color: var(--text-primary);
+}
+
+/* --- Animation --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

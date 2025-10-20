@@ -34,6 +34,7 @@ import ExploreCompanies from "./ExploreCompanies";
 import PlacementReviewForm from "./PlacementReviewForm";
 import PlacementRequest from "./PlacementRequest";
 import CompanyReviews from "./CompanyReviews";
+import ForgotPassword from "./ForgotPassword";
 
 const InstallPwaPrompt = ({ onInstall, onDismiss }) => (
   <div className="install-prompt-card">
@@ -187,6 +188,7 @@ const App = () => {
           <Route path="review" element={<PlacementReviewForm />} />
           <Route path="request" element={<PlacementRequest />} />
           <Route path="/company/:slug/:type" element={<CompanyReviews />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

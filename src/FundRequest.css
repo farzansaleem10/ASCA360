@@ -1,148 +1,251 @@
-/* ---
-UI Theme & Style: Minimalist Fintech Dark Mode (Fund Request Page)
-Font: Inter (Geometric Sans-Serif)
---- */
-
-/* 1. VARIABLES (Consistent with other pages) */
+/* --- Re-using dark theme variables --- */
 :root {
-  --bg-primary: #111111;
-  --bg-card: #1C1C1C;
-  --accent-primary: #C4F82A;
-  --text-primary: #FFFFFF;
-  --text-secondary: #A1A1AA;
-  --text-on-accent: #111111;
-  --border-color: #333333;
+--bg-dark: #121217;
+--bg-card: #1C1C22;
+--border-color: #3a3a50;
+--text-primary: #f0f0f0;
+--text-secondary: #a1a1aa;
+--accent-primary: #C4F82A; /* Neon Green/Yellow */
+  /* Status Colors */
+--status-pending: #facc15;    /* Yellow */
+--status-approved: #4ade80;  /* Green */
+--status-rejected: #f87171;   /* Red */
+--status-completed: #60a5fa; /* Blue */
 }
 
-/* 2. BASE LAYOUT */
+/* Main container for the whole page */
 .fund-request-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding: 3rem 1.5rem;
-  background-color: var(--bg-primary);
+  width: 100%;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
   font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  display: grid;
+  gap: 4rem; /* Space between the form and the tracker */
 }
 
-.form-wrapper {
-  width: 100%;
-  max-width: 600px;
+/* Wrapper for the submission form */
+.form-wrapper1 {
+  /* margin-left: 70px; */
   background-color: var(--bg-card);
   padding: 2.5rem;
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid var(--border-color);
+  width: auto;
+  /* width: 554px; */
+
 }
 
-/* 3. HEADER */
+#id{
+  /* width: 554px; */
+}
+
 .form-header {
   text-align: center;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1.5rem;
+  
+
 }
 
-.form-header h1 {
-  color: var(--text-primary);
+.form-header h1, .form-header h2 {
   font-size: 2rem;
   font-weight: 700;
-  margin: 0;
+  
+  margin: 0 0 0.5rem 0;
 }
 
 .form-header p {
   color: var(--text-secondary);
   font-size: 1rem;
-  margin-top: 0.5rem;
+
 }
 
-/* 4. FORM & INPUT STYLES */
 .fund-request-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  margin-top: -40px;
+
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+ 
+  text-align: left;
 }
 
-.form-group label {
-  font-size: 0.875rem;
+label {
   font-weight: 500;
   color: var(--text-secondary);
-  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
-.form-group input,
-.form-group textarea {
+input[type="text"],
+input[type="number"],
+input[type="url"],
+textarea {
   width: 100%;
-  padding: 12px 16px;
+  padding: 12px 14px;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background-color: var(--bg-primary);
+  border-radius: 6px;
+  background-color: #2a2a2a; /* Slightly lighter than the card */
   color: var(--text-primary);
   font-size: 1rem;
-  box-sizing: border-box;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: all 0.2s ease;
 }
 
-.form-group textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
+input:focus, textarea:focus {
   outline: none;
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px rgba(196, 248, 42, 0.2);
 }
 
-/* 5. BUTTON & MESSAGES */
-.submit-btn {
-  background-color: var(--accent-primary);
-  color: var(--text-on-accent);
-  padding: 16px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.125rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 1rem;
+textarea {
+  resize: vertical;
+  min-height: 80px;
 }
 
-.submit-btn:hover:not(:disabled) {
-  background-color: #b3de26;
+.submit-btn {
+  background-color: var(--accent-primary);
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+
+}
+
+.submit-btn:hover {
+  filter: brightness(1.1);
 }
 
 .submit-btn:disabled {
-  background-color: var(--border-color);
-  color: var(--text-secondary);
+  background-color: #555;
   cursor: not-allowed;
 }
 
 .form-message {
   text-align: center;
-  color: var(--accent-primary);
-  font-weight: 500;
   margin-top: 1.5rem;
-  padding: 0.75rem;
-  background-color: rgba(196, 248, 42, 0.1);
-  border: 1px solid rgba(196, 248, 42, 0.2);
-  border-radius: 8px;
+  font-weight: 500;
+  color: var(--accent-primary);
 }
-.card-header{
-  color: blueviolet
+.form-message.error {
+    color: var(--status-rejected);
 }
 
-/* 6. RESPONSIVE STYLES */
-@media (max-width: 768px) {
-  .form-wrapper {
-    padding: 1.5rem;
-  }
+/* --- TRACKING SECTION --- */
+.track-requests-section {
+  width: 100%;
+  margin-top: -100px;
 }
-.yellow{
-  color: #c4f82a  ;
+
+.requests-list-student {
+  display: grid;
+  gap: 1.5rem;
 }
+
+.request-item-student {
+  background-color: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.request-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.request-item-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.request-item-header span {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.request-item-student > p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Status Tracker --- */
+.status-tracker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  width: 80px; /* Give steps a fixed width */
+}
+
+.status-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--border-color);
+  border: 2px solid var(--border-color);
+  transition: background-color 0.3s ease;
+}
+
+.status-label {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.status-step.completed .status-dot {
+  background-color: var(--status-approved);
+  border-color: var(--status-approved);
+}
+.status-step.completed .status-label {
+    color: var(--text-primary);
+}
+
+.status-line {
+  flex-grow: 1;
+  height: 2px;
+  background-color: var(--border-color);
+  margin: 0 0.5rem;
+  transform: translateY(-12px); /* Aligns with middle of dot */
+}
+
+.status-line.completed {
+  background-color: var(--status-approved);
+}
+
+/* Rejected State */
+.status-tracker.rejected {
+  justify-content: flex-start; /* Align to the left */
+}
+.status-tracker.rejected .status-step.rejected .status-dot {
+    background-color: var(--status-rejected);
+    border-color: var(--status-rejected);
+}
+.status-tracker.rejected .status-step.rejected .status-label {
+    color: var(--text-primary);
+}
+
+.rejection-reason-details {
+  background-color: rgba(248, 113, 113, 0.1);
+  border-left: 3px solid var(--status-rejected);
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #fecaca;
+  text-align: left;
+}
+

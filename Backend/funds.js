@@ -3,86 +3,110 @@ const mongoose = require('mongoose');
 const router = express.Router();
 
 // === Fund Request Schema and Model ===
-// This defines the structure for the fund request documents in your database.
 const fundRequestSchema = new mongoose.Schema({
-  // NOTE: Changed studentName to submittedBy to match frontend and made fields required
-  submittedBy: { type: String, required: true },
-  eventName: { type: String, required: true },
-  purpose: { type: String, required: true },
-  amount: { type: Number, required: true },
-  upiId: { type: String, required: true },
-  proofLink: { type: String, required: true },
-  status: {
-    type: String,
-    required: true,
-    enum: ['pending', 'approved', 'rejected', 'completed'], // Added 'completed'
-    default: 'pending'
-  },
+  submittedBy: { type: String, required: true },
+  eventName: { type: String, required: true },
+  purpose: { type: String, required: true },
+  amount: { type: Number, required: true },
+  upiId: { type: String, required: true },
+  proofLink: { type: String, required: true },
+  // --- NEW FIELD for the bill number ---
+  billNumber: { type: String, required: true, unique: true },
+  status: {
+    type: String,
+    required: true,
+    enum: ['pending', 'approved', 'rejected', 'completed'],
+    default: 'pending'
+  },
+  rejectionReason: { type: String },
 }, { timestamps: true });
 
 const FundRequest = mongoose.model('FundRequest', fundRequestSchema);
 
 
+// --- UPDATED POST ROUTE ---
+// Now generates a unique 6-digit bill number for each request
 router.post('/', async (req, res) => {
-  console.log('Received fund request data:', req.body);
-  try {
-    const { submittedBy, eventName, purpose, amount, upiId, proofLink } = req.body;
+  console.log('Received fund request data:', req.body);
+  try {
+    const { submittedBy, eventName, purpose, amount, upiId, proofLink } = req.body;
 
-    const newFundRequest = new FundRequest({
-      submittedBy,
-      eventName,
-      purpose,
-      amount,
-      upiId,
-      proofLink,
-    });
+    // --- Bill Number Generation Logic ---
+    let billNumber;
+    let isUnique = false;
+    while (!isUnique) {
+      // Generate a random 6-digit number as a string
+      billNumber = Math.floor(100000 + Math.random() * 900000).toString();
+      // Check if a request with this bill number already exists
+      const existingRequest = await FundRequest.findOne({ billNumber });
+      if (!existingRequest) {
+        isUnique = true;
+      }
+    }
 
-    await newFundRequest.save();
-    res.status(201).json({ success: true, message: 'Fund request submitted successfully!', data: newFundRequest });
-  } catch (error) {
-    console.error("Error while saving fund request:", error);
-    res.status(500).json({
-      success: false,
-      message: 'Server error while submitting request.',
-      error: error.message
-    });
-  }
+    const newFundRequest = new FundRequest({
+      submittedBy,
+      eventName,
+      purpose,
+      amount,
+      upiId,
+      proofLink,
+      billNumber, // Add the generated bill number
+    });
+
+    await newFundRequest.save();
+    // Return the full request data, including the new billNumber
+    res.status(201).json({ success: true, message: 'Fund request submitted successfully!', data: newFundRequest });
+  } catch (error) {
+    console.error("Error while saving fund request:", error);
+    res.status(500).json({ success: false, message: 'Server error while submitting request.' });
+  }
 });
 
 
+// GET all requests (for admin)
 router.get('/', async (req, res) => {
-  try {
-    const requests = await FundRequest.find().sort({ createdAt: -1 });
-    res.json(requests);
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Server error while fetching requests.', error: error.message });
-  }
+  try {
+    const requests = await FundRequest.find().sort({ createdAt: -1 });
+    res.json(requests);
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error while fetching requests.'});
+  }
 });
 
+// PUT route to update status (for admin)
+router.put('/status/:id', async (req, res) => {
+  try {
+    const { status, rejectionReason } = req.body;
+    if (!['approved', 'rejected', 'completed'].includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status value.' });
+    }
+    const updateData = { status };
+    if (status === 'rejected' && rejectionReason) {
+      updateData.rejectionReason = rejectionReason;
+    }
+    const updatedRequest = await FundRequest.findByIdAndUpdate(req.params.id, updateData, { new: true });
+    if (!updatedRequest) {
+      return res.status(404).json({ success: false, message: 'Fund request not found.' });
+    }
+    res.json({ success: true, message: 'Fund request status updated successfully!', data: updatedRequest });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error while updating request.'});
+  }
+});
 
-router.put('/:id', async (req, res) => {
+// --- NEW GET ROUTE for tracking by bill number ---
+router.get('/track/:billNumber', async (req, res) => {
   try {
-    const { status } = req.body;
-
-    // Validate the new status
-    if (!['approved', 'rejected', 'completed'].includes(status)) {
-      return res.status(400).json({ success: false, message: 'Invalid status value.' });
+    const { billNumber } = req.params;
+    const request = await FundRequest.findOne({ billNumber });
+    if (!request) {
+      return res.status(404).json({ success: false, message: 'No fund request found with that bill number.' });
     }
-
-    const updatedRequest = await FundRequest.findByIdAndUpdate(
-      req.params.id,
-      { status: status },
-      { new: true } // This option returns the updated document
-    );
-
-    if (!updatedRequest) {
-      return res.status(404).json({ success: false, message: 'Fund request not found.' });
-    }
-
-    res.json({ success: true, message: 'Fund request status updated successfully!', data: updatedRequest });
+    res.json(request);
   } catch (error) {
-    console.error("Error updating fund request:", error);
-    res.status(500).json({ success: false, message: 'Server error while updating request.', error: error.message });
+    console.error("Error fetching request by bill number:", error);
+    res.status(500).json({ success: false, message: 'Server error while fetching your request.' });
   }
 });
 

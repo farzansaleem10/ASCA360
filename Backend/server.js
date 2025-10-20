@@ -15,6 +15,7 @@ const alumniRoutes = require("./alumni");
 const workReviewRoutes = require("./workReviews");
 const placementReviewRoutes = require("./placementReview");
 const reviewRoutes = require("./reviews");
+
 const app = express();
 
 // Middleware
@@ -162,6 +163,7 @@ app.use("/api/alumni", alumniRoutes);
 app.use("/api/work-reviews", workReviewRoutes);
 app.use("/api/placement-reviews", placementReviewRoutes);
 app.use("/api/reviews", reviewRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 
