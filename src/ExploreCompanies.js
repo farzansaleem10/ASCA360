@@ -4,10 +4,10 @@ import { Search, ArrowLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // -----------------------------------------------------------------
-// STEP 1: Bring back your static list with all the details.
+// STEP 1: Static company details list
 // -----------------------------------------------------------------
 const staticCompanyDetails = [
- { _id: '1', name: 'Accenture', slug: 'accenture', website: 'https://www.accenture.com', description: 'Accenture is a global professional services company that provides consulting, technology, and outsourcing solutions to help businesses improve performance and drive digital transformation.' },
+ { _id: '1', name: 'Accenture', slug: 'accenture', website: 'https://www.accenture.com', description: 'Accenture is a global professional services company that provides consulting, technology, and outsourcing solutions to help businesses improve performance and drive digital transformation.' },
   { _id: '2', name: 'Soti', slug: 'soti', website: 'https://soti.net/', description: 'SOTI is a proven leader at creating innovative solutions that reduce the cost and complexity of business-critical mobility and the IoT.' },
   { _id: '3', name: 'Electrifex', slug: 'electrifex', website: '', description: 'A technology company specializing in electrification solutions.' },
   { _id: '4', name: 'Federal Bank', slug: 'federal-bank', website: 'https://www.federalbank.co.in/', description: 'A major Indian commercial bank in the private sector.' },
@@ -20,6 +20,7 @@ const staticCompanyDetails = [
 ];
 
 // This sub-component renders the detailed view for a single company
+// This component is unchanged, as it correctly links to your new route.
 const CompanyDetail = ({ company, onBack }) => {
   return (
     <div className="company-detail-view">
@@ -31,30 +32,25 @@ const CompanyDetail = ({ company, onBack }) => {
         </div>
         <div className="company-header-info">
           <h2>{company.name}</h2>
-          {/* --- DETAILS ARE NOW VISIBLE --- */}
           <p className="company-description">{company.description || "No description available."}</p>
           {company.website && <a href={company.website} target="_blank" rel="noopener noreferrer" className="company-website-link">Visit Website</a>}
         </div>
       </div>
 
       <div className="review-link-grid">
-        {/* Placement Process Card */}
-        {/* Use the slug for the link */}
+        {/* This correctly links to your new CompanyReviews.js component */}
         <Link to={`/company/${company.slug}/placement`} className="review-link-card">
           <div className="review-card-content">
             <h3>Placement Process</h3>
-            {/* The count comes from the merged data */}
             <p>({company.placementReviewCount}) Reviews</p>
           </div>
           <ChevronRight className="chevron-icon" />
         </Link>
 
-        {/* Work Experience Card */}
-        {/* Use the slug for the link */}
+        {/* This correctly links to your new CompanyReviews.js component */}
         <Link to={`/company/${company.slug}/work`} className="review-link-card">
           <div className="review-card-content">
             <h3>Work Experience</h3>
-            {/* The count comes from the merged data */}
             <p>({company.workReviewCount}) Reviews</p>
           </div>
           <ChevronRight className="chevron-icon" />
@@ -72,50 +68,48 @@ const ExploreCompanies = () => {
   const [companies, setCompanies] = useState([]); // This will hold the final MERGED list
   const [isLoading, setIsLoading] = useState(true);
 
-  // --- STEP 2: Fetch counts AND merge with static data ---
+  // Fetch counts and merge with static data
   useEffect(() => {
-    const fetchAndMergeData = async () => {
-      try {
-        const res = await fetch('http://localhost:5000/api/reviews/companies-with-counts');
-        const dynamicData = await res.json(); // This is: [{ name, placementReviewCount, ... }]
+    const fetchAndMergeData = async () => {
+      try {
+        // We'll use your local server, but you can swap this with `backendUrl`
+        const res = await fetch('http://localhost:5000/api/reviews/companies-with-counts');
+        const dynamicData = await res.json(); 
 
-        if (!Array.isArray(dynamicData)) {
-          throw new Error("Fetched data is not an array");
-        }
+        if (!Array.isArray(dynamicData)) {
+          throw new Error("Fetched data is not an array");
+        }
 
-        // Create a Map of the dynamic counts for easy lookup
-        // e.g., { "Accenture": { placementReviewCount: 5, ... }, "TCS": { ... } }
-        const reviewCountsMap = new Map();
-        dynamicData.forEach(company => {
-          reviewCountsMap.set(company.name, {
-            placementReviewCount: company.placementReviewCount,
-            workReviewCount: company.workReviewCount
-          });
-        });
+        // Your normalize function is a good idea to prevent mismatches
+        const normalize = (s) => (s || '').toString().toLowerCase().replace(/[^a-z0-9]/g, '');
+        const reviewCountsMap = new Map();
+        dynamicData.forEach(company => {
+          reviewCountsMap.set(normalize(company.name), {
+            placementReviewCount: company.placementReviewCount,
+            workReviewCount: company.workReviewCount
+          });
+        });
 
-        // Merge static details with dynamic counts
-        const mergedCompanies = staticCompanyDetails.map(staticCompany => {
-          const counts = reviewCountsMap.get(staticCompany.name);
+        // Merge static details with dynamic counts
+        const mergedCompanies = staticCompanyDetails.map(staticCompany => {
+          const counts = reviewCountsMap.get(normalize(staticCompany.name));
+          return {
+            ...staticCompany,
+            placementReviewCount: counts ? counts.placementReviewCount : 0, 
+            workReviewCount: counts ? counts.workReviewCount : 0 
+          };
+        });
 
-          return {
-            ...staticCompany, // { _id, name, slug, description, website }
-            placementReviewCount: counts ? counts.placementReviewCount : 0, // Add count, default to 0
-            workReviewCount: counts ? counts.workReviewCount : 0 // Add count, default to 0
-          };
-        });
+        setCompanies(mergedCompanies);
+      } catch (err) {
+        console.error("Error fetching or merging company data:", err);
+        setCompanies(staticCompanyDetails.map(c => ({ ...c, placementReviewCount: 0, workReviewCount: 0 })));
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-        setCompanies(mergedCompanies);
-
-      } catch (err) {
-        console.error("Error fetching or merging company data:", err);
-        // Fallback: just use the static list with 0 counts
-        setCompanies(staticCompanyDetails.map(c => ({ ...c, placementReviewCount: 0, workReviewCount: 0 })));
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchAndMergeData();
+    fetchAndMergeData();
   }, []); // Empty array means this runs once on mount
 
   // Filter the final merged list
@@ -146,27 +140,38 @@ const ExploreCompanies = () => {
           placeholder="Search for a company..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="search-input"
+className="search-input"
         />
       </div>
 
-      <div className="company-grid">
-  {filteredCompanies.length > 0 ? (
-    filteredCompanies.map((company) => (
-      <div
-        key={company._id} // Use the static _id
-        className="company-card"
-        onClick={() => setSelectedCompany(company)} 
-      >
-        <h3>{company.name}</h3>
-        {/* Now we can show the total count on the card */}
-        
-      </div>
-    ))
-  ) : (
-    <p className="empty-list-message">No companies found matching your search.</p>
-  )}
-</div>
+      {/* --- FIX 1: Moved `{` to the same line to remove &nbsp; bug --- */}
+      <div className="company-grid">{
+        isLoading ? (
+          <p className="empty-list-message">Loading companies...</p>
+        ) : filteredCompanies.length > 0 ? (
+          filteredCompanies.map((company) => (
+            <div
+              key={company._id} 
+              className="company-card"
+              onClick={() => setSelectedCompany(company)} 
+            >
+              <h3>{company.name}</h3>
+              
+              {/* --- FIX 2: Added this <p> tag back to fill the card --- */}
+              <p style={{ 
+                  color: 'var(--text-secondary)', 
+                  fontSize: '0.9rem', 
+                  marginTop: '8px' 
+                }}>
+                {company.placementReviewCount + company.workReviewCount} Total Reviews
+              </p>
+
+            </div>
+          ))
+        ) : (
+          <p className="empty-list-message">No companies found matching your search.</p>
+        )
+      }</div>
     </div>
   );
 };

@@ -129,9 +129,9 @@ const PlacementReviewForm = ({ studentData }) => {
                  </select>
                  
                  <div className="anonymous-checkbox-container">
-                    <input type="checkbox" id="anonymous-placement" checked={isAnonymous} onChange={e => setIsAnonymous(e.target.checked)} />
-                    <label htmlFor="anonymous-placement">Post anonymously</label>
-                 </div>
+                        <input type="checkbox" id="anonymous" checked={isAnonymous} onChange={(e) => setIsAnonymous(e.target.checked)} />
+                        <label htmlFor="anonymous">Post anonymously</label>
+                    </div>
             </div>
 
             <div className="review-card">

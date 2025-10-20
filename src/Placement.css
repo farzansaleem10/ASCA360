@@ -103,7 +103,7 @@
 .company-detail-view {
     max-width: 900px; /* Limit the width of the detail view */
     margin: 0 auto;
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
 .back-button {
@@ -172,9 +172,9 @@
 }
 
 .review-link-grid {
-    display: grid;
+    display: flex;
     grid-template-columns: 1fr;
-    gap: 1rem; /* Tighter gap */
+    /* gap: 1rem; Tighter gap */
 }
 @media(min-width: 768px) {
     .review-link-grid {
@@ -217,4 +217,159 @@
 .review-link-card:hover .chevron-icon {
     transform: translateX(5px); /* Move chevron slightly on hover */
 }
+/* --- New Variables for Review Badges --- */
+:root {
+  --accent-accepted: #F2C94C;
+  --accent-accepted-text: #111111;
+  --accent-rejected: #E0B341; /* A duller yellow for "Rejected" */
+  --accent-rejected-text: #111111;
+}
 
+/* --- Main Review List --- */
+.reviews-list {
+  display: grid;
+  gap: 1.5rem; /* Space between review cards */
+ margin-top: -50px;
+  width: 100%;
+}
+
+/* --- New Review Card Item --- */
+.review-card-item {
+  background-color: var(--bg-card);
+  border-radius: 8px;
+  /* The border color comes from the status */
+  border: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
+  position: relative;
+  overflow: hidden; /* Helps position the badge */
+}
+
+/* --- Card Border Color Based on Status --- */
+.review-card-item.status-accepted {
+  border-color: var(--accent-accepted);
+}
+.review-card-item.status-rejected {
+  border-color: var(--accent-rejected);
+}
+
+/* --- Card Header --- */
+.review-card-header {
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.review-header-left h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem 0;
+}
+
+/* --- Meta Line (Author, Batch, Date) --- */
+.review-meta {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  align-items: center;
+  gap: 1rem; /* Space between items */
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.review-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem; /* Space between icon and text */
+}
+
+/* --- CTC Line --- */
+.review-ctc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+.review-ctc strong {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+/* --- Badge (Accepted / Rejected) --- */
+.review-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-shrink: 0; /* Prevents badge from wrapping */
+}
+.review-badge.status-accepted {
+  background-color: var(--accent-accepted);
+  color: var(--accent-accepted-text);
+}
+.review-badge.status-rejected {
+  background-color: var(--accent-rejected);
+  color: var(--accent-rejected-text);
+}
+
+/* --- Card Footer (View Details) --- */
+.review-card-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 0.75rem 2rem;
+  text-align: center;
+}
+.review-card-footer button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.25rem;
+  transition: color 0.2s ease;
+}
+.review-card-footer button:hover {
+  color: var(--text-primary);
+}
+
+/* --- Collapsible Details Section --- */
+.review-card-details {
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 2rem;
+  background-color: #111; /* Slightly darker to stand out */
+  animation: fadeIn 0.3s ease; /* Simple fade-in */
+}
+.review-card-details h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+}
+.review-card-details p,
+.review-card-details li {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.review-card-details ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+.review-card-details li {
+  margin-bottom: 0.75rem;
+}
+.review-card-details li p {
+  margin: 0.25rem 0;
+}
+
+/* --- Fade-in Animation --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

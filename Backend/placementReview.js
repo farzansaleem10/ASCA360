@@ -66,15 +66,18 @@ router.post('/', async (req, res) => {
 
 // 4. (Optional but Recommended) Route to get approved reviews for a company
 router.get('/company/:companyName', async (req, res) => {
-    try {
-        const reviews = await PlacementReview.find({ 
-            companyId: req.params.companyId,
-            status: 'Approved' 
-        }).sort({ createdAt: -1 });
-        res.json(reviews);
-    } catch (error) {
-        res.status(500).json({ success: false, message: 'Server error' });
-    }
+    try {
+        // Find by the 'companyName' field
+        const reviews = await PlacementReview.find({ 
+            companyName: req.params.companyName, // <-- FIXED
+            status: 'Approved' 
+        }).sort({ createdAt: -1 });
+        
+        res.json(reviews);
+    } catch (error) {
+        console.error("Error fetching placement reviews:", error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
 });
 
 router.put('/status/:id', async (req, res) => {

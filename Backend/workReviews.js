@@ -76,16 +76,21 @@ router.put('/status/:id', async (req, res) => {
   }
 });
 router.get('/company/:companyName', async (req, res) => {
-    try {
-        const reviews = await PlacementReview.find({ 
-            companyId: req.params.companyId,
-            status: 'Approved' 
-        }).sort({ createdAt: -1 });
-        res.json(reviews);
-    } catch (error) {
-        res.status(500).json({ success: false, message: 'Server error' });
-    }
-});
+    try {
+        // 1. Use the correct model: WorkReview
+        const reviews = await WorkReview.find({ 
+            // 2. Query by the companyName field
+            // 3. Use the correct parameter: req.params.companyName
+            companyName: req.params.companyName, 
+            status: 'Approved' 
+        }).sort({ createdAt: -1 });
+        
+        res.json(reviews); // This will now send the correct data
 
+    } catch (error) {
+        console.error("Error fetching work reviews by company:", error); // Added a better log
+        res.status(500).json({ success: false, message: 'Server error' });
+  T }
+});
 module.exports = router;
 

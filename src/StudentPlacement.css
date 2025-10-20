@@ -1,0 +1,94 @@
+/* --- Root Variables for the Theme --- */
+:root {
+--bg-primary: #121217;      /* Darkest background */
+ --bg-card: #1C1C22;         /* Card background */
+ --accent-primary: #FACC15;  /* The bright yellow color */
+ --text-primary: #FFFFFF;
+ --text-secondary: #A1A1AA;
+ --border-color: #333333;
+}
+
+/* --- Main Page Container --- */
+.placement-hub-container {
+ width: 100%;
+ max-width: 900px;
+ margin: 6rem auto; /* More vertical margin */
+ padding: 2rem;
+ font-family: 'Inter', sans-serif;
+ display: flex;
+ flex-direction: column;
+align-items: center;
+text-align: center;
+}
+
+/* --- Header Section --- */
+.hub-header {
+    margin-bottom: 20px;
+margin-bottom: 4rem;
+}
+
+.hub-title {
+font-size: 3.5rem;
+font-weight: 700;
+color: var(--text-primary);
+margin: 0;
+line-height: 1.2;
+}
+
+.hub-title span {
+color: var(--accent-primary); /* Yellow text */
+}
+
+/* --- Two-Column Grid --- */
+.hub-grid {
+display: flex;
+grid-template-columns: 1fr; /* Single column on mobile */
+gap: 1rem;
+width: 100%;
+}
+
+/* --- Card Styling --- */
+/* The Link tag itself, to remove underline */
+.hub-card-link {
+  text-decoration: none;
+}
+.hub-card-description {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.hub-card {
+ background-color: var(--bg-card);
+ padding: 3rem; /* More padding for a bigger click area */
+ border-radius: 8px;
+ margin-bottom: 30px;
+  /* This creates the special border effect */
+ border: 1px solid var(--border-color);
+ border-top: 2px solid var(--accent-primary);
+ border-left: 2px solid var(--accent-primary);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hub-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hub-card h3 {
+ font-size: 1.5rem;
+ font-weight: 600;
+color: var(--text-primary);
+ margin: 0;
+}
+
+/* --- Responsive Layout for Grid --- */
+@media(min-width: 768px) {
+  .hub-grid {
+ grid-template-columns: 1fr 1fr;
+ }
+
+  .hub-title {
+    font-size: 4rem; /* Make title bigger on large screens */
+  }
+}

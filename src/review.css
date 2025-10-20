@@ -154,18 +154,19 @@
 }
 
 .form-message.error {
-    background-color: #dc3545;
+    background-color: green;
     color: white;
 }
 
 .anonymous-checkbox-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  display: flex; /* <-- ADD THIS */
+  align-items: center; /* <-- ADD THIS */
+ gap: 0.5rem;
+ margin-left: -700px;
+ margin-top: 0.5rem;
 }
-
 .anonymous-checkbox-container label {
-  margin-bottom: 0; 
-  cursor: pointer;
+ margin-bottom: 0; 
+ margin-left: -700px;
+ cursor: pointer;
 }

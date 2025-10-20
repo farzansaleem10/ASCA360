@@ -1,49 +1,43 @@
 import React from 'react';
-import './Placement.css';
-import { Search, Edit } from 'lucide-react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import './StudentPlacement.css'; // Import the new CSS file
+import { Link } from 'react-router-dom';
 
-const StudentPlacement = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  // Get the studentData that was passed from the dashboard
-  const studentData = location.state?.studentData; 
-
-  // This function navigates to the new page and passes the studentData along
-  const handleNavigate = (path) => {
-    navigate(path, { state: { studentData } });
-  };
-
+const PlacementHub = () => {
   return (
-    <div className="placement-container">
-      <header className="placement-header">
-        <h1>Placement Portal</h1>
-        <p>Explore companies and share your placement experiences.</p>
+    <div className="placement-hub-container">
+      
+      {/* --- HEADER --- */}
+      <header className="hub-header">
+        <h1 className="hub-title">
+          <span>Your Guide to Campus
+Placement Success</span>
+        </h1>
+        <p className="hub-subtitle">Real experiences from students who've been through the process. Get insights on interview rounds, assessments, and company culture.</p>
       </header>
-      
-      <div className="placement-tabs">
-        {/* Button to navigate to the Explore Companies page */}
-        <button 
-          className="placement-tab"
-          onClick={() => handleNavigate('/explore')}
-        >
-          <Search size={18} /> Explore Companies
-        </button>
 
-        {/* Button to navigate to the Write Review page */}
-        <button 
-          className="placement-tab"
-          onClick={() => handleNavigate('/review')}
-        >
-          <Edit size={18} /> Write a Review
-        </button>
+      {/* --- 2-COLUMN GRID --- */}
+      <div className="hub-grid">
+        
+        {/* --- CARD 1: Link to Explore page --- */}
+        <Link to="/explore" className="hub-card-link">
+          <div className="hub-card">
+            <h3>Explore Companies</h3>
+             <p className="hub-card-description">Share your own placement experience to help others prepare better.</p>
+         
+          </div>
+        </Link>
+
+        {/* --- CARD 2: Link to Review page --- */}
+        <Link to="/review" className="hub-card-link">
+          <div className="hub-card">
+            <h3>Write placement Review</h3>
+            <p className="hub-card-description">Share your own placement experience to help others prepare better.</p>
+          </div>
+        </Link>
+
       </div>
-      
-      {/* The main content is removed, as this is now a navigation hub */}
     </div>
   );
 };
 
-export default StudentPlacement;
-
+export default PlacementHub;
