@@ -82,6 +82,10 @@ const FundPending = () => {
                     <strong>Student:</strong> {req.submittedBy}
                   </p>
                   <p>
+                      <strong>Submitted on:</strong>{' '}
+                      {new Date(req.createdAt).toLocaleDateString('en-IN')}
+                    </p>
+                  <p>
                     <strong>Amount:</strong> ₹{req.amount.toLocaleString()}
                   </p>
                   <p>
@@ -106,10 +110,10 @@ const FundPending = () => {
                   {req.status === "pending" && (
                     <>
                       <button
-                        className="action-btn reject-btn"
+                        className="action-btn reject-btn "
                         onClick={() => handleUpdateStatus(req._id, "rejected")}
                       >
-                        Reject
+                        <span>Reject</span>
                       </button>
                       <button
                         className="action-btn approve-btn"

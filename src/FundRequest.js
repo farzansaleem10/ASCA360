@@ -53,7 +53,8 @@ const FundRequest = () => {
           purpose: "",
           amount: "",
           upiId: "",
-          proofLink: "",
+          proofLink: ""
+
         });
       } else {
         setMessage(result.message || "An error occurred. Please try again.");

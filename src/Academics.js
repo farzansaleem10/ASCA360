@@ -12,13 +12,13 @@ const academicSections = [
     title: "MCA Syllabus",
     description: "View the official curriculum for all semesters.",
     icon: <BookCopy size={32} className="card-icon" />,
-    url: "https://github.com/your-username/your-repo/tree/main/syllabus",
+    url: "/McaSyllabus.pdf",
   },
   {
     title: "MCA Study Materials",
     description: "Access notes, presentations, and resources.",
     icon: <Layers3 size={32} className="card-icon" />,
-    url: "https://github.com/cetmca26/Study-Materials",
+    url: "https://techworldthink.github.io/MCA/",
   },
   {
     title: "MCA-Laboratory",

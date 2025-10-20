@@ -13,7 +13,7 @@ Font: Inter (Geometric Sans-Serif)
   --text-on-accent: #111111;
   --border-color: #333333;
   --status-approved: #22c55e; /* Green */
-  --status-rejected: #ef4444;  /* Red */
+  --status-rejected: #e67171;  /* Red */
   --status-pending: #f59e0b;   /* Amber */
   --status-completed: #6366f1; /* Indigo */
 }

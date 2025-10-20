@@ -133,10 +133,16 @@ Font: Inter (Geometric Sans-Serif)
   border: 1px solid rgba(196, 248, 42, 0.2);
   border-radius: 8px;
 }
+.card-header{
+  color: blueviolet
+}
 
 /* 6. RESPONSIVE STYLES */
 @media (max-width: 768px) {
   .form-wrapper {
     padding: 1.5rem;
   }
+}
+.yellow{
+  color: #c4f82a  ;
 }

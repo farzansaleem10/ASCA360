@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
     await newReview.save();
     res.status(201).json({ 
       success: true, 
-      message: 'Work review submitted! It will be visible after admin approval.' 
+      message: 'Work review submitted! ' 
     });
   } catch (error) {
     console.error("Error saving work review:", error);
