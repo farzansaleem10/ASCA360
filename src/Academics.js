@@ -26,12 +26,7 @@ const academicSections = [
     icon: <Code size={32} className="card-icon" />,
     url: "https://github.com/cetmca26/MCA-Laboratory",
   },
-  {
-    title: "Placement Course",
-    description: "Prepare for technical interviews and placements.",
-    icon: <GraduationCap size={32} className="card-icon" />,
-    url: "https://github.com/your-username/your-repo/tree/main/placement-course",
-  },
+
 ];
 
 const Academics = () => {
