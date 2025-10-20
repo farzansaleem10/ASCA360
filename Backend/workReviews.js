@@ -22,9 +22,6 @@ const workReviewSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-// --- THIS IS THE FIX ---
-// This line checks if the model already exists before trying to create it again.
-// This prevents the "OverwriteModelError" that causes the 500 server error.
 const WorkReview = mongoose.models.WorkReview || mongoose.model('WorkReview', workReviewSchema);
 
 // POST / - Create a new review
