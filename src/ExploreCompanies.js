@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 // STEP 1: Bring back your static list with all the details.
 // -----------------------------------------------------------------
 const staticCompanyDetails = [
-  { _id: '1', name: 'Accenture', slug: 'accenture', website: 'https://www.accenture.com', description: 'Accenture is a global professional services company that provides consulting, technology, and outsourcing solutions to help businesses improve performance and drive digital transformation.' },
+ { _id: '1', name: 'Accenture', slug: 'accenture', website: 'https://www.accenture.com', description: 'Accenture is a global professional services company that provides consulting, technology, and outsourcing solutions to help businesses improve performance and drive digital transformation.' },
   { _id: '2', name: 'Soti', slug: 'soti', website: 'https://soti.net/', description: 'SOTI is a proven leader at creating innovative solutions that reduce the cost and complexity of business-critical mobility and the IoT.' },
   { _id: '3', name: 'Electrifex', slug: 'electrifex', website: '', description: 'A technology company specializing in electrification solutions.' },
   { _id: '4', name: 'Federal Bank', slug: 'federal-bank', website: 'https://www.federalbank.co.in/', description: 'A major Indian commercial bank in the private sector.' },
@@ -151,24 +151,22 @@ const ExploreCompanies = () => {
       </div>
 
       <div className="company-grid">
-        {isLoading ? (
-          <p>Loading companies...</p>
-        ) : filteredCompanies.length > 0 ? (
-          filteredCompanies.map((company) => (
-            <div
-              key={company._id} // Use the static _id
-              className="company-card"
-              onClick={() => setSelectedCompany(company)} 
-    _       >
-              <h3>{company.name}</h3>
-              {/* Now we can show the total count on the card */}
-              
-            </div>
-          ))
-        ) : (
-          <p className="empty-list-message">No companies found matching your search.</p>
-        )}
-      </div>
+  {filteredCompanies.length > 0 ? (
+    filteredCompanies.map((company) => (
+      <div
+        key={company._id} // Use the static _id
+        className="company-card"
+        onClick={() => setSelectedCompany(company)} 
+      >
+        <h3>{company.name}</h3>
+        {/* Now we can show the total count on the card */}
+        
+      </div>
+    ))
+  ) : (
+    <p className="empty-list-message">No companies found matching your search.</p>
+  )}
+</div>
     </div>
   );
 };
