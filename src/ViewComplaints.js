@@ -88,7 +88,7 @@ const ViewComplaints = () => {
                           onClick={() => handleMarkAsComplete(complaint._id)}
                           className="action-btn"
                         >
-                          Mark as Complete
+                          Mark as Read
                         </button>
                       )}
                     </td>

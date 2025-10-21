@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
       amount,
       upiId,
       proofLink,
-      billNumber, // Add the generated bill number
+     
     });
 
     await newFundRequest.save();
@@ -94,21 +94,19 @@ router.put('/status/:id', async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error while updating request.'});
   }
 });
-
-// --- NEW GET ROUTE for tracking by bill number ---
-router.get('/track/:billNumber', async (req, res) => {
+router.get('/student/:studentName', async (req, res) => {
   try {
-    const { billNumber } = req.params;
-    const request = await FundRequest.findOne({ billNumber });
-    if (!request) {
-      return res.status(404).json({ success: false, message: 'No fund request found with that bill number.' });
-    }
-    res.json(request);
+    const studentName = req.params.studentName;
+    const requests = await FundRequest.find({ submittedBy: studentName }).sort({ createdAt: -1 });
+    res.json(requests);
   } catch (error) {
-    console.error("Error fetching request by bill number:", error);
-    res.status(500).json({ success: false, message: 'Server error while fetching your request.' });
+    console.error("Error fetching student's fund requests:", error);
+    res.status(500).json({ success: false, message: 'Server error while fetching requests.' });
   }
 });
+
+// --- NEW GET ROUTE for tracking by bill number ---
+
 
 
 module.exports = router;

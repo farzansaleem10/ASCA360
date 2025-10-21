@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Placement.css';
 import { Search, ArrowLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import backendUrl from "./config";
 
 // -----------------------------------------------------------------
 // STEP 1: Static company details list
@@ -73,7 +74,7 @@ const ExploreCompanies = () => {
     const fetchAndMergeData = async () => {
       try {
         // We'll use your local server, but you can swap this with `backendUrl`
-        const res = await fetch('http://localhost:5000/api/reviews/companies-with-counts');
+        const res = await fetch(`${backendUrl}/reviews/companies-with-counts`);
         const dynamicData = await res.json(); 
 
         if (!Array.isArray(dynamicData)) {
